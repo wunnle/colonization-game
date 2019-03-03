@@ -13,19 +13,33 @@ const defaultRowProp = {
 
 class App extends Component {
   state = {
-    turnOf: 'blue',
+    activePlayer: 'blue',
+    players: [
+      {
+        name: 'blue',
+        energy: 3
+      },
+      {
+        name: 'red',
+        energy: 3
+      }
+    ],
     rowProps: {
       a: {
         name: 'a',
-        props: [{...defaultRowProp}, {...defaultRowProp}, {...defaultRowProp}]
+        props: new Array(4).fill(null).map(()=> ({...defaultRowProp}))
       }, 
       b: {
         name: 'b',
-        props: [{...defaultRowProp}, {...defaultRowProp}, {...defaultRowProp}]
+        props: new Array(4).fill(null).map(()=> ({...defaultRowProp}))
       }, 
       c: {
         name: 'c',
-        props: [{...defaultRowProp}, {...defaultRowProp}, {...defaultRowProp}]
+        props: new Array(4).fill(null).map(()=> ({...defaultRowProp}))
+      }, 
+      d: {
+        name: 'd',
+        props: new Array(4).fill(null).map(()=> ({...defaultRowProp}))
       }, 
     }
   }
@@ -52,35 +66,60 @@ class App extends Component {
   }
   handleEndTurnClick = () => {
 
-    let { turnOf } = this.state
+    let { activePlayer } = this.state
 
-    turnOf = turnOf === 'blue' ? 'red' : 'blue'
-    this.setState({turnOf})
+    activePlayer = activePlayer === 'blue' ? 'red' : 'blue'
+    this.setState({activePlayer})
+  }
+
+  getUpgradeCost = (level) => {
+    switch (level) {
+      case 0:
+        return 1
+      case 1:
+        return 2
+      case 2:
+        return 3
+    
+      default:
+        return 3
+    }
   }
 
   handleRowClick = ({col, row, owner}) => {
 
-    console.log({owner})
-
-    let { rowProps, turnOf } = this.state
+    let { rowProps, activePlayer, players } = this.state
 
     const currentLevel = rowProps[row].props[col - 1].level
     let validMove = false
 
-    if(owner && turnOf !== owner) {
+    if(owner && activePlayer !== owner) {
       console.warn('invalid move!')
       return
     }
 
     if(currentLevel < 3) {
-      rowProps[row].props[col - 1].level++
-      rowProps[row].props[col - 1].owner = turnOf
+
+      const currentLevel = rowProps[row].props[col - 1].level
+      const currentEnergy = players.find(player => player.name === activePlayer).energy
+      const upgradeCost = this.getUpgradeCost(currentLevel)
+
+      if(currentEnergy >= upgradeCost) {
+        rowProps[row].props[col - 1].level++
+        rowProps[row].props[col - 1].owner = activePlayer
+        players.find(player => player.name === activePlayer).energy -= upgradeCost
+      } else {
+        console.warn('not enough ⚡')
+      }
+
+
+
       validMove = true
     }
 
     if(validMove) {
-      turnOf = turnOf === 'blue' ? 'red' : 'blue'
-      this.setState({rowProps})
+      activePlayer = activePlayer === 'blue' ? 'red' : 'blue'
+      this.setState({rowProps, players})
     }
 
 
@@ -90,19 +129,21 @@ class App extends Component {
 
     const { gameStarted } = this.props
     const { createTileRow, handleEndTurnClick } = this
-    const { rowProps, turnOf } = this.state
+    const { rowProps, activePlayer: turnOf, players } = this.state
 
 
     return (
       <div className="App">
         <header>
         {gameStarted && <h1>Turn of {turnOf} player</h1>}
+        <p>⚡ {players.find(player => player.name === turnOf).energy}</p>
         <button onClick={handleEndTurnClick}>End turn</button>
         </header>
         <div className="board">
           {createTileRow(rowProps.a)}
           {createTileRow(rowProps.b)}
           {createTileRow(rowProps.c)}
+          {createTileRow(rowProps.d)}
         </div>
         
       </div>
