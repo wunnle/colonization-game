@@ -19,10 +19,15 @@ class App extends Component {
   createTileRow = (data) => {
     const row = Array(3)
     data.props.forEach((props, i) => {
-      row[i] = <Tile {...props} key={data.name + (i+1)}/>
+      row[i] = <Tile {...props} key={data.name + (i+1)} col={i+1} row={data.name} 
+      handleClick={() => this.handleRowClick({col: (i+1), row: data.name})} />
     })
 
     return row
+  }
+
+  handleRowClick = ({col, row}) => {
+    alert(`col: ${col}, row: ${row}`)
   }
 
   render() {
@@ -45,6 +50,7 @@ class App extends Component {
         name: 'c',
         props: [{state: 'lvl2'}, {}, {}],
       }, 
+
     }
 
 
