@@ -6,21 +6,26 @@ import Tile from './components/tile'
 
 import './App.css';
 
-class App extends Component {
+const defaultRowProp = {
+  level: 0,
+  owner: ''
+}
 
+class App extends Component {
   state = {
+    turnOf: 'blue',
     rowProps: {
       a: {
         name: 'a',
-        props: [{level: 0}, {level: 0}, {level: 0}]
+        props: [{...defaultRowProp}, {...defaultRowProp}, {...defaultRowProp}]
       }, 
       b: {
         name: 'b',
-        props: [{level: 0}, {level: 0}, {level: 0}]
+        props: [{...defaultRowProp}, {...defaultRowProp}, {...defaultRowProp}]
       }, 
       c: {
         name: 'c',
-        props: [{level: 0}, {level: 0}, {level: 0}]
+        props: [{...defaultRowProp}, {...defaultRowProp}, {...defaultRowProp}]
       }, 
     }
   }
@@ -47,25 +52,37 @@ class App extends Component {
   }
 
   handleRowClick = ({col, row}) => {
-    const { rowProps } = this.state
+    let { rowProps, turnOf } = this.state
 
-    rowProps[row].props[col - 1].level++ 
+    const currentLevel = rowProps[row].props[col - 1].level
+    let validMove = false
 
-    this.setState({rowProps})
+    if(currentLevel < 3) {
+      rowProps[row].props[col - 1].level++
+      rowProps[row].props[col - 1].owner = turnOf
+      validMove = true
+    }
+
+    if(validMove) {
+      turnOf = turnOf === 'blue' ? 'red' : 'blue'
+      this.setState({rowProps, turnOf})
+    }
+
+
   }
 
   render() {
 
     const { gameStarted } = this.props
     const { createTileRow } = this
-    const { rowProps } = this.state
+    const { rowProps, turnOf } = this.state
 
 
     return (
       <div className="App">
 
 
-        {gameStarted && <h1>Game started</h1>}
+        {gameStarted && <h1>Turn of {turnOf} player</h1>}
         <div className="board">
           {createTileRow(rowProps.a)}
           {createTileRow(rowProps.b)}

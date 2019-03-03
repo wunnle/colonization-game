@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 
-const Tile = ({ level = 0, handleClick }) => {
+const Tile = ({ level = 0, owner, handleClick }) => {
   return (
-    <TileHolder handleClick={handleClick}>
+    <TileHolder handleClick={handleClick} owner={owner}>
       {(level === 0) && '-'}
       {(level === 1) && '🌱'}
       {(level === 2) && '🏠'}
@@ -11,9 +11,9 @@ const Tile = ({ level = 0, handleClick }) => {
   )
 }
 
-const TileHolder = ({ children, handleClick }) => {
+const TileHolder = ({ children, owner, handleClick }) => {
   return (
-    <div className="tile" onClick={handleClick}>
+    <div className={`tile tile--${owner}`} onClick={handleClick}>
       {children}
     </div>
   )
