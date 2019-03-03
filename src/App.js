@@ -50,6 +50,13 @@ class App extends Component {
 
     return row
   }
+  handleEndTurnClick = () => {
+
+    let { turnOf } = this.state
+
+    turnOf = turnOf === 'blue' ? 'red' : 'blue'
+    this.setState({turnOf})
+  }
 
   handleRowClick = ({col, row, owner}) => {
 
@@ -73,7 +80,7 @@ class App extends Component {
 
     if(validMove) {
       turnOf = turnOf === 'blue' ? 'red' : 'blue'
-      this.setState({rowProps, turnOf})
+      this.setState({rowProps})
     }
 
 
@@ -82,15 +89,16 @@ class App extends Component {
   render() {
 
     const { gameStarted } = this.props
-    const { createTileRow } = this
+    const { createTileRow, handleEndTurnClick } = this
     const { rowProps, turnOf } = this.state
 
 
     return (
       <div className="App">
-
-
+        <header>
         {gameStarted && <h1>Turn of {turnOf} player</h1>}
+        <button onClick={handleEndTurnClick}>End turn</button>
+        </header>
         <div className="board">
           {createTileRow(rowProps.a)}
           {createTileRow(rowProps.b)}
