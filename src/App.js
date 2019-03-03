@@ -51,10 +51,6 @@ class App extends Component {
     console.log(this.state.rowProps)
   }
 
-  fakeClick = () => {
-    alert('click!')
-  }
-
   createTileRow = (data) => {
     const row = Array(3)
     data.props.forEach((props, i) => {
@@ -139,11 +135,14 @@ class App extends Component {
         <p>⚡ {players.find(player => player.name === turnOf).energy}</p>
         <button onClick={handleEndTurnClick}>End turn</button>
         </header>
+        <div className="board-holder">
         <div className="board">
           {createTileRow(rowProps.a)}
           {createTileRow(rowProps.b)}
           {createTileRow(rowProps.c)}
           {createTileRow(rowProps.d)}
+        </div>
+        <div className="sun"></div>
         </div>
         
       </div>
