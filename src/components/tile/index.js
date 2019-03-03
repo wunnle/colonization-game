@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 
-const Tile = ({ state, handleClick }) => {
+const Tile = ({ level = 0, handleClick }) => {
   return (
     <TileHolder handleClick={handleClick}>
-      {(state === 'seed') && '🌱'}
-      {(state === 'lvl1') && '🏠'}
-      {(state === 'lvl2') && '🚀'}
+      {(level === 0) && '-'}
+      {(level === 1) && '🌱'}
+      {(level === 2) && '🏠'}
+      {(level === 3) && '🚀'}
     </TileHolder>
   )
 }

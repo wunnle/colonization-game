@@ -7,9 +7,29 @@ import Tile from './components/tile'
 import './App.css';
 
 class App extends Component {
+
+  state = {
+    rowProps: {
+      a: {
+        name: 'a',
+        props: [{level: 0}, {level: 0}, {level: 0}]
+      }, 
+      b: {
+        name: 'b',
+        props: [{level: 0}, {level: 0}, {level: 0}]
+      }, 
+      c: {
+        name: 'c',
+        props: [{level: 0}, {level: 0}, {level: 0}]
+      }, 
+    }
+  }
+
   componentDidMount() {
     const { dispatch } = this.props
     dispatch(startGame())
+
+    console.log(this.state.rowProps)
   }
 
   fakeClick = () => {
@@ -27,31 +47,18 @@ class App extends Component {
   }
 
   handleRowClick = ({col, row}) => {
-    alert(`col: ${col}, row: ${row}`)
+    const { rowProps } = this.state
+
+    rowProps[row].props[col - 1].level++ 
+
+    this.setState({rowProps})
   }
 
   render() {
 
     const { gameStarted } = this.props
     const { createTileRow } = this
-
-    // rows
-
-    const rowProps = {
-      a: {
-        name: 'a',
-        props: [{state: 'seed'}, {}, {}],
-      }, 
-      b: {
-        name: 'b',
-        props: [{state: 'lvl1'}, {}, {}],
-      }, 
-      c: {
-        name: 'c',
-        props: [{state: 'lvl2'}, {}, {}],
-      }, 
-
-    }
+    const { rowProps } = this.state
 
 
     return (
