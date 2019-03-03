@@ -12,15 +12,31 @@ class App extends Component {
     dispatch(startGame())
   }
 
+  fakeClick = () => {
+    alert('click!')
+  }
+
   render() {
 
     const { gameStarted } = this.props
 
     return (
       <div className="App">
+
+
         {gameStarted && <h1>Game started</h1>}
-        <Tile state="lvl1" />
-        <Tile state="seed" />
+        <div className="board">
+          <Tile state="lvl1" />
+          <Tile state="seed" />
+          <Tile state="lvl2" handleClick={this.fakeClick} />
+          <Tile state="seed" />
+          <Tile state="seed" />
+          <Tile state="seed" />
+          <Tile state="seed" />
+          <Tile state="seed" />
+          <Tile />
+        </div>
+        
       </div>
     );
   }

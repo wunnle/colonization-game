@@ -1,26 +1,21 @@
 import React, { Component } from 'react';
 
-const Tile = ({state}) => {
-
-  if(state = 'seed') {
-    return <TileHolder>🌱</TileHolder>
-  }
-
-  if(state = 'lvl1') {
-    return <TileHolder>🏠</TileHolder>
-  }
-
-  if(state = 'lvl2') {
-    return <TileHolder>🏢</TileHolder>
-  }
-
-  return <TileHolder></TileHolder>
+const Tile = ({ state, handleClick }) => {
+  return (
+    <TileHolder handleClick={handleClick}>
+      {(state === 'seed') && '🌱'}
+      {(state === 'lvl1') && '🏠'}
+      {(state === 'lvl2') && '🏛'}
+    </TileHolder>
+  )
 }
 
-const TileHolder = ({children}) => (
-  <div className="tile">
-    {children}
-  </div>
-)
- 
+const TileHolder = ({ children, handleClick }) => {
+  return (
+    <div className="tile" onClick={handleClick}>
+      {children}
+    </div>
+  )
+}
+
 export default Tile;
