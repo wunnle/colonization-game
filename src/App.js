@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import logo from './logo.svg';
 import { startGame } from './actions/general'
+import Tile from './components/tile'
 
 import './App.css';
 
@@ -17,10 +18,9 @@ class App extends Component {
 
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          {gameStarted && <h1>Game started</h1>}
-        </header>
+        {gameStarted && <h1>Game started</h1>}
+        <Tile state="lvl1" />
+        <Tile state="seed" />
       </div>
     );
   }
