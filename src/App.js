@@ -7,21 +7,22 @@ import Tile from './components/tile'
 import './App.css';
 
 const defaultRowProp = {
-  level: 0,
+  level: null,
   owner: ''
 }
 
 class App extends Component {
   state = {
+    turn: 0,
     activePlayer: 'blue',
     players: [
       {
         name: 'blue',
-        energy: 3
+        energy: 0
       },
       {
         name: 'red',
-        energy: 3
+        energy: 0
       }
     ],
     rowProps: {
@@ -84,7 +85,17 @@ class App extends Component {
 
   handleRowClick = ({col, row, owner}) => {
 
-    let { rowProps, activePlayer, players } = this.state
+    let { rowProps, activePlayer, players, turn } = this.state
+
+    if(turn < 1) {
+      console.log('hey')
+      rowProps[row].props[col - 1].level = 1
+      turn += 0.5
+
+      this.setState({rowProps, players, turn})
+      this.handleEndTurnClick()
+      return
+    }
 
     const currentLevel = rowProps[row].props[col - 1].level
     let validMove = false
@@ -104,18 +115,18 @@ class App extends Component {
         rowProps[row].props[col - 1].level++
         rowProps[row].props[col - 1].owner = activePlayer
         players.find(player => player.name === activePlayer).energy -= upgradeCost
+        validMove = true
       } else {
         console.warn('not enough ⚡')
       }
 
 
-
-      validMove = true
     }
 
     if(validMove) {
       activePlayer = activePlayer === 'blue' ? 'red' : 'blue'
-      this.setState({rowProps, players})
+      turn +=0.5
+      this.setState({rowProps, players, turn})
     }
 
 
@@ -125,12 +136,13 @@ class App extends Component {
 
     const { gameStarted } = this.props
     const { createTileRow, handleEndTurnClick } = this
-    const { rowProps, activePlayer: turnOf, players } = this.state
+    const { rowProps, activePlayer: turnOf, players, turn } = this.state
 
 
     return (
       <div className="App">
         <header>
+        <p>Turn {Math.floor(turn)} </p>
         {gameStarted && <h1>Turn of {turnOf} player</h1>}
         <p>⚡ {players.find(player => player.name === turnOf).energy}</p>
         <button onClick={handleEndTurnClick}>End turn</button>
