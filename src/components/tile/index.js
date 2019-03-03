@@ -5,7 +5,7 @@ const Tile = ({ state, handleClick }) => {
     <TileHolder handleClick={handleClick}>
       {(state === 'seed') && '🌱'}
       {(state === 'lvl1') && '🏠'}
-      {(state === 'lvl2') && '🏛'}
+      {(state === 'lvl2') && '🚀'}
     </TileHolder>
   )
 }

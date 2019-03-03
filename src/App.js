@@ -16,9 +16,37 @@ class App extends Component {
     alert('click!')
   }
 
+  createTileRow = (data) => {
+    const row = Array(3)
+    data.props.forEach((props, i) => {
+      row[i] = <Tile {...props} key={data.name + (i+1)}/>
+    })
+
+    return row
+  }
+
   render() {
 
     const { gameStarted } = this.props
+    const { createTileRow } = this
+
+    // rows
+
+    const rowProps = {
+      a: {
+        name: 'a',
+        props: [{state: 'seed'}, {}, {}],
+      }, 
+      b: {
+        name: 'b',
+        props: [{state: 'lvl1'}, {}, {}],
+      }, 
+      c: {
+        name: 'c',
+        props: [{state: 'lvl2'}, {}, {}],
+      }, 
+    }
+
 
     return (
       <div className="App">
@@ -26,15 +54,9 @@ class App extends Component {
 
         {gameStarted && <h1>Game started</h1>}
         <div className="board">
-          <Tile state="lvl1" />
-          <Tile state="seed" />
-          <Tile state="lvl2" handleClick={this.fakeClick} />
-          <Tile state="seed" />
-          <Tile state="seed" />
-          <Tile state="seed" />
-          <Tile state="seed" />
-          <Tile state="seed" />
-          <Tile />
+          {createTileRow(rowProps.a)}
+          {createTileRow(rowProps.b)}
+          {createTileRow(rowProps.c)}
         </div>
         
       </div>
