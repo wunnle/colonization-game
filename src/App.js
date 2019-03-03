@@ -45,17 +45,25 @@ class App extends Component {
     const row = Array(3)
     data.props.forEach((props, i) => {
       row[i] = <Tile {...props} key={data.name + (i+1)} col={i+1} row={data.name} 
-      handleClick={() => this.handleRowClick({col: (i+1), row: data.name})} />
+      handleClick={() => this.handleRowClick({col: (i+1), row: data.name, owner: props.owner })} />
     })
 
     return row
   }
 
-  handleRowClick = ({col, row}) => {
+  handleRowClick = ({col, row, owner}) => {
+
+    console.log({owner})
+
     let { rowProps, turnOf } = this.state
 
     const currentLevel = rowProps[row].props[col - 1].level
     let validMove = false
+
+    if(owner && turnOf !== owner) {
+      console.warn('invalid move!')
+      return
+    }
 
     if(currentLevel < 3) {
       rowProps[row].props[col - 1].level++
