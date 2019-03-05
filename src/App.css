@@ -36,6 +36,25 @@ h1 {
   background: yellow;
 }
 
+.board .building {
+  width: 80px;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 100%;
+  text-align: center;
+}
+
+.board .building--blue {
+  background: blue;
+}
+
+.board .building--red {
+  background: red;
+}
+
+
 .board .tile {
     width: 150px;
     height: 150px;
@@ -49,12 +68,13 @@ h1 {
     color: black;
 }
 
-.board .tile--blue {
-  background: blue;
+
+.board .tile--dark {
+  background: #584E4E;
 }
 
-.board .tile--red {
-  background: red;
+.board .tile--bright {
+  background: #6fe673;
 }
 
 .App-logo {

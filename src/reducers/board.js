@@ -2,7 +2,8 @@ import update from 'immutability-helper';
 
 const defaultRowProp = {
   level: null,
-  owner: ''
+  owner: '',
+  isBright: true
 }
 
 const initialState = {
