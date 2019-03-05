@@ -5,6 +5,13 @@ export const updateTileLevel = (row, col, level) => ({
   }
 })
 
+export const updateTileLight = (row, col, isBright) => ({
+  type: 'UPDATE_TILE_LIGHT',
+  payload: {
+    row, col, isBright
+  }
+})
+
 export const updateTileOwner = (row, col, owner) => ({
   type: 'UPDATE_TILE_OWNER',
   payload: {

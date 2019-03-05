@@ -9,28 +9,28 @@ const defaultRowProp = {
 const numberOfCols = 6
 
 const initialState = {
-  a: {
-    name: 'a',
+  1: {
+    name: '1',
     props: new Array(numberOfCols).fill(null).map(() => ({ ...defaultRowProp }))
   },
-  b: {
-    name: 'b',
+  2: {
+    name: '2',
     props: new Array(numberOfCols).fill(null).map(() => ({ ...defaultRowProp }))
   },
-  c: {
-    name: 'c',
+  3: {
+    name: '3',
     props: new Array(numberOfCols).fill(null).map(() => ({ ...defaultRowProp }))
   },
-  d: {
-    name: 'd',
+  4: {
+    name: '4',
     props: new Array(numberOfCols).fill(null).map(() => ({ ...defaultRowProp }))
   },
-  e: {
-    name: 'e',
+  5: {
+    name: '5',
     props: new Array(numberOfCols).fill(null).map(() => ({ ...defaultRowProp }))
   },
-  f: {
-    name: 'f',
+  6: {
+    name: '6',
     props: new Array(numberOfCols).fill(null).map(() => ({ ...defaultRowProp }))
   }
 }
@@ -64,6 +64,23 @@ export default function general(state = initialState, action) {
             [action.payload.col - 1]: {
               owner: {
                 $set: action.payload.owner
+              }
+            }
+          })
+        }
+      }
+
+
+    case 'UPDATE_TILE_LIGHT':
+
+      return {
+        ...state,
+        [action.payload.row]: {
+          ...state[action.payload.row],
+          props: update(state[action.payload.row].props, {
+            [action.payload.col - 1]: {
+              isBright: {
+                $set: action.payload.isBright
               }
             }
           })

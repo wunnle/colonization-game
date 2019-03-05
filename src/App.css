@@ -18,25 +18,33 @@ h1 {
   color: white;
 }
 
-.board-holder {
-  width: 605px;
-  display: flex;
-}
-
-.board {
+.planet {
   height: 600px;
   width: 600px;
   display: flex;
   flex-wrap: wrap;
+  border-color: yellow;
+  border-style: solid;
+  border-width: 0;
 }
 
-.sun {
-  height: 600px;
-  width: 5px;
-  background: yellow;
+.planet.sun-right {
+  border-right-width: 5px;
 }
 
-.board .building {
+.planet.sun-bottom {
+  border-bottom-width: 5px;
+}
+
+.planet.sun-top {
+  border-top-width: 5px;
+}
+
+.planet.sun-left {
+  border-left-width: 5px;
+}
+
+.planet .building {
   width: 80px;
   height: 80px;
   display: flex;
@@ -46,16 +54,16 @@ h1 {
   text-align: center;
 }
 
-.board .building--blue {
+.planet .building--blue {
   background: blue;
 }
 
-.board .building--red {
+.planet .building--red {
   background: red;
 }
 
 
-.board .tile {
+.planet .tile {
     width: 100px;
     height: 100px;
     border: 3px solid#282c34;
@@ -69,11 +77,11 @@ h1 {
 }
 
 
-.board .tile--dark {
+.planet .tile--dark {
   background: #584E4E;
 }
 
-.board .tile--bright {
+.planet .tile--bright {
   background: #6fe673;
 }
 

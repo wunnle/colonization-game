@@ -4,6 +4,7 @@ const initialState = {
   turn: 0,
   wholeTurn: 0,
   activePlayer: 1,
+  sunDirection: 'right'
 }
 
 

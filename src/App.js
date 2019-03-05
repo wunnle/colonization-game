@@ -3,9 +3,10 @@ import { connect } from 'react-redux'
 import logo from './logo.svg';
 import { startGame } from './actions/general'
 import { increaseEnergy, reduceEnergy } from './actions/players'
-import { updateTileLevel, updateTileOwner } from './actions/board'
+import { updateTileLevel, updateTileOwner, updateTileLight } from './actions/board'
 import { endTurn } from './actions/game'
 import Tile from './components/tile'
+import Planet from './components/Planet'
 
 import './App.css';
 
@@ -49,11 +50,25 @@ class App extends Component {
     }
   }
 
+  getShadowLenght = (level) => {
+    console.log('got level', level)
+    switch (level) {
+      case 0:
+        return 0
+      case 1:
+        return 1
+      case 2:
+        return 2
+      default:
+        return 0
+    }
+  }
+
   reduceEnergyOfActivePlayer = reduceBy => this.props.dispatch(reduceEnergy(this.props.activePlayerId, reduceBy))
 
   handleRowClick = ({col, row, owner}) => {
 
-    const { board, players, dispatch, turn, activePlayerId, activePlayer } = this.props
+    const { board, players, dispatch, turn, activePlayerId, activePlayer, sunDirection } = this.props
 
     const updateClickedTileLevel = level => dispatch(updateTileLevel(row, col, level)) 
     const updateClickedTileOwner = owner => dispatch(updateTileOwner(row, col, owner))
@@ -64,9 +79,9 @@ class App extends Component {
     }
 
     if(turn < 1) {
-
       updateClickedTileLevel(1)
       updateClickedTileOwner(activePlayer.name)
+      this.castShadow(col, row, sunDirection, 1)
       this.handleEndTurnClick()
       return
     }
@@ -82,13 +97,43 @@ class App extends Component {
       const upgradeCost = this.getUpgradeCost(currentLevel)
 
       if(currentEnergy >= upgradeCost) {
-        updateClickedTileLevel(board[row].props[col - 1].level + 1)
+        let newLevel = currentLevel + 1
+
+        updateClickedTileLevel(newLevel)
         updateClickedTileOwner(activePlayer.name)
         this.reduceEnergyOfActivePlayer(upgradeCost)
+
+        // set shadow 
+
+        this.castShadow(col, row, sunDirection, newLevel)
+
       } else {
         console.warn('not enough ⚡')
       }
 
+    }
+  }
+
+  castShadow = (col, row, sunDirection, buildingLevel) => {
+    const shadowLength = this.getShadowLenght(buildingLevel)
+
+
+    if(sunDirection === 'right') {
+
+      let remainingShadowLength = shadowLength
+      const castLeftShadow = (row, col, remainingShadowLength) => {
+        console.log('running for', row, col, remainingShadowLength)
+        this.props.dispatch(updateTileLight(row, col - 1, false))
+
+        remainingShadowLength--
+
+        if(remainingShadowLength > 0) {
+          castLeftShadow(row, col - 1, remainingShadowLength)
+        }
+      }
+
+      castLeftShadow(row, col, remainingShadowLength)
+      
     }
   }
 
@@ -106,7 +151,7 @@ class App extends Component {
 
   render() {
 
-    const { gameStarted, players, wholeTurn, activePlayer, board } = this.props
+    const { gameStarted, players, wholeTurn, activePlayer, sunDirection } = this.props
     const { createTileRow, handleEndTurnClick, renderBoard } = this
 
     return (
@@ -120,10 +165,9 @@ class App extends Component {
         {wholeTurn > 0 && <button onClick={handleEndTurnClick}>End turn</button>}
         </header>
         <div className="board-holder">
-        <div className="board">
-          {renderBoard()}
-        </div>
-        <div className="sun"></div>
+          <Planet sunDirection={sunDirection}>
+            {renderBoard()}
+          </Planet>
         </div>
         
       </div>
@@ -142,7 +186,8 @@ const mapStateToProps = function ({ general, players, game, board }) {
     activePlayer: players[game.activePlayer],
     activePlayerId: game.activePlayer,
     turn: game.turn,
-    wholeTurn: game.wholeTurn
+    wholeTurn: game.wholeTurn,
+    sunDirection: game.sunDirection
   }
 }
 
