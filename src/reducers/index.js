@@ -1,8 +1,11 @@
 import { combineReducers } from 'redux'
 import general from './general'
+import players from './players'
+
 
 const rootReducer = () => combineReducers({
-  general
+  general,
+  players
 })
 
 export default rootReducer

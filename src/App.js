@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import logo from './logo.svg';
 import { startGame } from './actions/general'
+import { increaseEnergy, reduceEnergy } from './actions/players'
 import Tile from './components/tile'
 
 import './App.css';
@@ -14,17 +15,7 @@ const defaultRowProp = {
 class App extends Component {
   state = {
     turn: 0,
-    activePlayer: 'blue',
-    players: [
-      {
-        name: 'blue',
-        energy: 0
-      },
-      {
-        name: 'red',
-        energy: 0
-      }
-    ],
+    activePlayer: 1,
     rowProps: {
       a: {
         name: 'a',
@@ -48,7 +39,6 @@ class App extends Component {
   componentDidMount() {
     const { dispatch } = this.props
     dispatch(startGame())
-
     console.log(this.state.rowProps)
   }
 
@@ -65,7 +55,7 @@ class App extends Component {
 
     let { activePlayer } = this.state
 
-    activePlayer = activePlayer === 'blue' ? 'red' : 'blue'
+    activePlayer = activePlayer === 1 ? 2 : 1
     this.setState({activePlayer})
   }
 
@@ -79,20 +69,21 @@ class App extends Component {
         return 3
     
       default:
-        return 3
+        return 1
     }
   }
 
   handleRowClick = ({col, row, owner}) => {
 
-    let { rowProps, activePlayer, players, turn } = this.state
+    let { rowProps, activePlayer, turn } = this.state
+    const { players, dispatch } = this.props
 
     if(turn < 1) {
       console.log('hey')
       rowProps[row].props[col - 1].level = 1
       turn += 0.5
 
-      this.setState({rowProps, players, turn})
+      this.setState({rowProps, turn})
       this.handleEndTurnClick()
       return
     }
@@ -108,13 +99,19 @@ class App extends Component {
     if(currentLevel < 3) {
 
       const currentLevel = rowProps[row].props[col - 1].level
-      const currentEnergy = players.find(player => player.name === activePlayer).energy
+      console.log({currentLevel})
+
+      const currentEnergy = players[activePlayer].energy
+      console.log(currentEnergy)
+
       const upgradeCost = this.getUpgradeCost(currentLevel)
+
+      console.log(upgradeCost)
 
       if(currentEnergy >= upgradeCost) {
         rowProps[row].props[col - 1].level++
         rowProps[row].props[col - 1].owner = activePlayer
-        players.find(player => player.name === activePlayer).energy -= upgradeCost
+        dispatch(reduceEnergy(activePlayer, upgradeCost))
         validMove = true
       } else {
         console.warn('not enough ⚡')
@@ -126,7 +123,7 @@ class App extends Component {
     if(validMove) {
       activePlayer = activePlayer === 'blue' ? 'red' : 'blue'
       turn +=0.5
-      this.setState({rowProps, players, turn})
+      this.setState({rowProps, turn})
     }
 
 
@@ -134,9 +131,9 @@ class App extends Component {
 
   render() {
 
-    const { gameStarted } = this.props
+    const { gameStarted, players } = this.props
     const { createTileRow, handleEndTurnClick } = this
-    const { rowProps, activePlayer: turnOf, players, turn } = this.state
+    const { rowProps, activePlayer: turnOf, turn } = this.state
 
 
     return (
@@ -144,7 +141,7 @@ class App extends Component {
         <header>
         <p>Turn {Math.floor(turn)} </p>
         {gameStarted && <h1>Turn of {turnOf} player</h1>}
-        <p>⚡ {players.find(player => player.name === turnOf).energy}</p>
+        <p>⚡ {players[turnOf].energy}</p>
         <button onClick={handleEndTurnClick}>End turn</button>
         </header>
         <div className="board-holder">
@@ -163,9 +160,12 @@ class App extends Component {
 }
 
 
-const mapStateToProps = function ({ general }) {
+const mapStateToProps = function ({ general, players }) {
   return {
-    gameStarted: general.gameStarted
+    gameStarted: general.gameStarted,
+    players,
+    player1: players[1],
+    player2: players[2]
   }
 }
 
