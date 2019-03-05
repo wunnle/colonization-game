@@ -73,6 +73,12 @@ class App extends Component {
     let { rowProps } = this.state
     const { players, dispatch, turn, activePlayerId, activePlayer } = this.props
 
+    let validMove = false
+    if(owner && activePlayer.name !== owner) {
+      console.warn('invalid move!')
+      return
+    }
+
     if(turn < 1) {
       rowProps[row].props[col - 1].level = 1
       rowProps[row].props[col - 1].owner = activePlayer.name
@@ -83,12 +89,6 @@ class App extends Component {
     }
 
     const currentLevel = rowProps[row].props[col - 1].level
-    let validMove = false
-
-    if(owner && activePlayerId !== owner) {
-      console.warn('invalid move!')
-      return
-    }
 
     if(currentLevel < 3) {
 
@@ -111,11 +111,9 @@ class App extends Component {
         console.warn('not enough ⚡')
       }
 
-
     }
 
     if(validMove) {
-      dispatch(endTurn())
       this.setState({rowProps})
     }
 
