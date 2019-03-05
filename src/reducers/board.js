@@ -6,22 +6,32 @@ const defaultRowProp = {
   isBright: true
 }
 
+const numberOfCols = 6
+
 const initialState = {
   a: {
     name: 'a',
-    props: new Array(4).fill(null).map(() => ({ ...defaultRowProp }))
+    props: new Array(numberOfCols).fill(null).map(() => ({ ...defaultRowProp }))
   },
   b: {
     name: 'b',
-    props: new Array(4).fill(null).map(() => ({ ...defaultRowProp }))
+    props: new Array(numberOfCols).fill(null).map(() => ({ ...defaultRowProp }))
   },
   c: {
     name: 'c',
-    props: new Array(4).fill(null).map(() => ({ ...defaultRowProp }))
+    props: new Array(numberOfCols).fill(null).map(() => ({ ...defaultRowProp }))
   },
   d: {
     name: 'd',
-    props: new Array(4).fill(null).map(() => ({ ...defaultRowProp }))
+    props: new Array(numberOfCols).fill(null).map(() => ({ ...defaultRowProp }))
+  },
+  e: {
+    name: 'e',
+    props: new Array(numberOfCols).fill(null).map(() => ({ ...defaultRowProp }))
+  },
+  f: {
+    name: 'f',
+    props: new Array(numberOfCols).fill(null).map(() => ({ ...defaultRowProp }))
   }
 }
 
@@ -29,8 +39,6 @@ const initialState = {
 export default function general(state = initialState, action) {
   switch (action.type) {
     case 'UPDATE_TILE_LEVEL':
-
-    console.log(action.payload.row, '🤟', state[action.payload.row], state)
 
       return {
         ...state,

@@ -92,11 +92,22 @@ class App extends Component {
     }
   }
 
+  renderBoard = () => {
+    const { board } = this.props
+
+    let boardArr = []
+
+    for(var row in board) {
+      boardArr.push(this.createTileRow(board[row]))
+    }
+
+    return boardArr
+  }
+
   render() {
 
     const { gameStarted, players, wholeTurn, activePlayer, board } = this.props
-    const { createTileRow, handleEndTurnClick } = this
-
+    const { createTileRow, handleEndTurnClick, renderBoard } = this
 
     return (
       <div className="App">
@@ -110,10 +121,7 @@ class App extends Component {
         </header>
         <div className="board-holder">
         <div className="board">
-          {createTileRow(board.a)}
-          {createTileRow(board.b)}
-          {createTileRow(board.c)}
-          {createTileRow(board.d)}
+          {renderBoard()}
         </div>
         <div className="sun"></div>
         </div>
