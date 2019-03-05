@@ -3,20 +3,22 @@ import React, { Component } from 'react';
 const Tile = ({ level = 0, owner, handleClick, isBright }) => {
   return (
     <TileHolder handleClick={handleClick} isBright={isBright}>
-      <Building owner={owner}>
-        {(level === 0) && '-'}
-        {(level === 1) && '🌱'}
-        {(level === 2) && '🏠'}
-        {(level === 3) && '🚀'}
-      </Building>
+      <Building owner={owner} level={level} />
     </TileHolder>
   )
 }
 
-const Building = ({ owner, children }) => {
+const Building = ({ owner, level }) => {
   return (
-    <div className={`building building--${owner}`}>
-      {children}
+    <div className={`building building--${owner} level--${level}`}>
+      <span className="building-inner">
+        {(level === 0) && '-'}
+        {(level === 1) && '🌱'}
+        {(level === 2) && '🏠'}
+        {(level === 3) && '🚀'}
+      </span>
+      <span className="building-shadow">
+      </span>
     </div>
   )
 }

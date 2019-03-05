@@ -26,40 +26,74 @@ h1 {
   border-color: yellow;
   border-style: solid;
   border-width: 0;
+  background: url('./img/original.jpg')
 }
 
 .planet.sun-right {
-  border-right-width: 5px;
+  border-right-width: 10px;
 }
 
 .planet.sun-bottom {
-  border-bottom-width: 5px;
+  border-bottom-width: 10px;
 }
 
 .planet.sun-top {
-  border-top-width: 5px;
+  border-top-width: 10px;
 }
 
 .planet.sun-left {
-  border-left-width: 5px;
+  border-left-width: 10px;
 }
 
 .planet .building {
-  width: 80px;
-  height: 80px;
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: 100%;
   text-align: center;
+  position: relative;
 }
 
-.planet .building--blue {
+.planet .building  .building-inner {
+  position: relative;
+  z-index: 2;
+  width: 78px;
+  height: 78px;
+  border-radius: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.planet .building--blue .building-inner, .planet .building--red .building-inner {
+  box-shadow: -8px 0px 47px rgba(0, 0, 0, 0.3);
+  border: 2px solid white;
+}
+
+.planet .building--blue .building-inner {
   background: blue;
 }
 
-.planet .building--red {
+.planet .building--red .building-inner {
   background: red;
+}
+
+.planet .building .building-shadow {
+  content: '';
+  position: absolute;
+  height: 80px;
+  background: black;
+  z-index: 0;
+  right: 0;
+  border-radius: 80px;
+  opacity: 0.3;
+}
+
+.planet .building.level--1 .building-shadow {
+  width: 180px;
+}
+
+.planet .building.level--2 .building-shadow {
+  width: 280px;
 }
 
 
@@ -78,11 +112,11 @@ h1 {
 
 
 .planet .tile--dark {
-  background: #584E4E;
+  background: #64c568;
 }
 
 .planet .tile--bright {
-  background: #6fe673;
+  background: rgba(121, 245, 125, 0.5607843137254902);
 }
 
 .App-logo {
