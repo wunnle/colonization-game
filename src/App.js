@@ -54,16 +54,23 @@ class App extends Component {
 
     const { board, players, dispatch, turn, activePlayerId, activePlayer } = this.props
 
-    let validMove = false
+    function updateThisTileLevel(level) {
+      return dispatch(updateTileLevel(row, col, level)) 
+    }
+
+    function updateThisTileOwner(owner) {
+      return dispatch(updateTileOwner(row, col, owner))
+    }
+
     if(owner && activePlayer.name !== owner) {
-      console.warn('invalid move!')
+      console.warn('invalid move! 💀')
       return
     }
 
     if(turn < 1) {
 
-      dispatch(updateTileLevel(row, col, 1))
-      dispatch(updateTileOwner(row, col, activePlayer.name))
+      updateThisTileLevel(1)
+      updateThisTileOwner(activePlayer.name)
       this.handleEndTurnClick()
       return
     }
@@ -73,33 +80,20 @@ class App extends Component {
     if(currentLevel < 3) {
 
       const currentLevel = board[row].props[col - 1].level
-      console.log({currentLevel})
 
       const currentEnergy = activePlayer.energy
-      console.log(currentEnergy)
 
       const upgradeCost = this.getUpgradeCost(currentLevel)
 
-      console.log(upgradeCost)
-      console.log(board)
-      console.log(board[row])
-
       if(currentEnergy >= upgradeCost) {
-        dispatch(updateTileLevel(row, col, board[row].props[col - 1].level + 1))
-        dispatch(updateTileOwner(row, col, activePlayer.name))
+        updateThisTileLevel(board[row].props[col - 1].level + 1)
+        updateThisTileOwner(activePlayer.name)
         dispatch(reduceEnergy(activePlayerId, upgradeCost))
-        validMove = true
       } else {
         console.warn('not enough ⚡')
       }
 
     }
-
-    if(validMove) {
-      //this.setState({rowProps})
-    }
-
-
   }
 
   render() {
