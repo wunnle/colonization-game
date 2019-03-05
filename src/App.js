@@ -101,10 +101,12 @@ class App extends Component {
     return (
       <div className="App">
         <header>
-        <p>Season {wholeTurn} </p>
+
+        {wholeTurn > 0 ? <p>Season {wholeTurn} </p> : <p>Initial state</p>}        
         {gameStarted && <h1>Turn of {activePlayer.name} player</h1>}
         <p>⚡ {activePlayer.energy}</p>
-        <button onClick={handleEndTurnClick}>End turn</button>
+
+        {wholeTurn > 0 && <button onClick={handleEndTurnClick}>End turn</button>}
         </header>
         <div className="board-holder">
         <div className="board">

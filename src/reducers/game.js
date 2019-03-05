@@ -13,7 +13,7 @@ export default function general(state = initialState, action) {
       return {
         ...state,
         turn: state.turn + 0.5,
-        wholeTurn: Math.floor(state.turn),
+        wholeTurn: Math.floor(state.turn + 0.5),
         activePlayer: state.activePlayer === 1 ? 2 : 1
       }
 
