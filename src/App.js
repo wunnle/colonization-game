@@ -50,17 +50,14 @@ class App extends Component {
     }
   }
 
+  reduceEnergyOfActivePlayer = reduceBy => this.props.dispatch(reduceEnergy(this.props.activePlayerId, reduceBy))
+
   handleRowClick = ({col, row, owner}) => {
 
     const { board, players, dispatch, turn, activePlayerId, activePlayer } = this.props
 
-    function updateThisTileLevel(level) {
-      return dispatch(updateTileLevel(row, col, level)) 
-    }
-
-    function updateThisTileOwner(owner) {
-      return dispatch(updateTileOwner(row, col, owner))
-    }
+    const updateClickedTileLevel = level => dispatch(updateTileLevel(row, col, level)) 
+    const updateClickedTileOwner = owner => dispatch(updateTileOwner(row, col, owner))
 
     if(owner && activePlayer.name !== owner) {
       console.warn('invalid move! 💀')
@@ -69,8 +66,8 @@ class App extends Component {
 
     if(turn < 1) {
 
-      updateThisTileLevel(1)
-      updateThisTileOwner(activePlayer.name)
+      updateClickedTileLevel(1)
+      updateClickedTileOwner(activePlayer.name)
       this.handleEndTurnClick()
       return
     }
@@ -86,9 +83,9 @@ class App extends Component {
       const upgradeCost = this.getUpgradeCost(currentLevel)
 
       if(currentEnergy >= upgradeCost) {
-        updateThisTileLevel(board[row].props[col - 1].level + 1)
-        updateThisTileOwner(activePlayer.name)
-        dispatch(reduceEnergy(activePlayerId, upgradeCost))
+        updateClickedTileLevel(board[row].props[col - 1].level + 1)
+        updateClickedTileOwner(activePlayer.name)
+        this.reduceEnergyOfActivePlayer(upgradeCost)
       } else {
         console.warn('not enough ⚡')
       }
