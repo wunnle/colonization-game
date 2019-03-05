@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import logo from './logo.svg';
 import { startGame } from './actions/general'
 import { increaseEnergy, reduceEnergy } from './actions/players'
+import { updateTileLevel, updateTileOwner } from './actions/board'
 import { endTurn } from './actions/game'
 import Tile from './components/tile'
 
@@ -14,34 +15,15 @@ const defaultRowProp = {
 }
 
 class App extends Component {
-  state = {
-    rowProps: {
-      a: {
-        name: 'a',
-        props: new Array(4).fill(null).map(()=> ({...defaultRowProp}))
-      }, 
-      b: {
-        name: 'b',
-        props: new Array(4).fill(null).map(()=> ({...defaultRowProp}))
-      }, 
-      c: {
-        name: 'c',
-        props: new Array(4).fill(null).map(()=> ({...defaultRowProp}))
-      }, 
-      d: {
-        name: 'd',
-        props: new Array(4).fill(null).map(()=> ({...defaultRowProp}))
-      }, 
-    }
-  }
 
   componentDidMount() {
     const { dispatch } = this.props
     dispatch(startGame())
-    console.log(this.state.rowProps)
   }
 
   createTileRow = (data) => {
+    console.log({data})
+
     const row = Array(3)
     data.props.forEach((props, i) => {
       row[i] = <Tile {...props} key={data.name + (i+1)} col={i+1} row={data.name} 
@@ -70,8 +52,7 @@ class App extends Component {
 
   handleRowClick = ({col, row, owner}) => {
 
-    let { rowProps } = this.state
-    const { players, dispatch, turn, activePlayerId, activePlayer } = this.props
+    const { board, players, dispatch, turn, activePlayerId, activePlayer } = this.props
 
     let validMove = false
     if(owner && activePlayer.name !== owner) {
@@ -80,19 +61,18 @@ class App extends Component {
     }
 
     if(turn < 1) {
-      rowProps[row].props[col - 1].level = 1
-      rowProps[row].props[col - 1].owner = activePlayer.name
 
-      this.setState({rowProps})
+      dispatch(updateTileLevel(row, col, 1))
+      dispatch(updateTileOwner(row, col, activePlayer.name))
       this.handleEndTurnClick()
       return
     }
 
-    const currentLevel = rowProps[row].props[col - 1].level
+    const currentLevel = board[row].props[col - 1].level
 
     if(currentLevel < 3) {
 
-      const currentLevel = rowProps[row].props[col - 1].level
+      const currentLevel = board[row].props[col - 1].level
       console.log({currentLevel})
 
       const currentEnergy = activePlayer.energy
@@ -101,10 +81,12 @@ class App extends Component {
       const upgradeCost = this.getUpgradeCost(currentLevel)
 
       console.log(upgradeCost)
+      console.log(board)
+      console.log(board[row])
 
       if(currentEnergy >= upgradeCost) {
-        rowProps[row].props[col - 1].level++
-        rowProps[row].props[col - 1].owner = activePlayer.name
+        dispatch(updateTileLevel(row, col, board[row].props[col - 1].level + 1))
+        dispatch(updateTileOwner(row, col, activePlayer.name))
         dispatch(reduceEnergy(activePlayerId, upgradeCost))
         validMove = true
       } else {
@@ -114,7 +96,7 @@ class App extends Component {
     }
 
     if(validMove) {
-      this.setState({rowProps})
+      //this.setState({rowProps})
     }
 
 
@@ -122,9 +104,8 @@ class App extends Component {
 
   render() {
 
-    const { gameStarted, players, wholeTurn, activePlayer } = this.props
+    const { gameStarted, players, wholeTurn, activePlayer, board } = this.props
     const { createTileRow, handleEndTurnClick } = this
-    const { rowProps } = this.state
 
 
     return (
@@ -137,10 +118,10 @@ class App extends Component {
         </header>
         <div className="board-holder">
         <div className="board">
-          {createTileRow(rowProps.a)}
-          {createTileRow(rowProps.b)}
-          {createTileRow(rowProps.c)}
-          {createTileRow(rowProps.d)}
+          {createTileRow(board.a)}
+          {createTileRow(board.b)}
+          {createTileRow(board.c)}
+          {createTileRow(board.d)}
         </div>
         <div className="sun"></div>
         </div>
@@ -151,8 +132,9 @@ class App extends Component {
 }
 
 
-const mapStateToProps = function ({ general, players, game }) {
+const mapStateToProps = function ({ general, players, game, board }) {
   return {
+    board,
     gameStarted: general.gameStarted,
     players,
     player1: players[1],
