@@ -1,11 +1,13 @@
 import { combineReducers } from 'redux'
 import general from './general'
 import players from './players'
+import game from './game'
 
 
 const rootReducer = () => combineReducers({
   general,
-  players
+  players,
+  game
 })
 
 export default rootReducer
