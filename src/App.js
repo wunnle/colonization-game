@@ -70,6 +70,7 @@ class App extends Component {
       const currentEnergy = activePlayer.energy
 
       const upgradeCost = getUpgradeCost(currentLevel)
+      console.log({upgradeCost})
 
       if(currentEnergy >= upgradeCost) {
         let newLevel = currentLevel + 1
@@ -97,12 +98,11 @@ class App extends Component {
 
       let remainingShadowLength = shadowLength
       const castLeftShadow = (row, col, remainingShadowLength) => {
-        console.log('running for', row, col, remainingShadowLength)
-        this.props.dispatch(updateTileLight(row, col - 1, false))
+        col > 1 && this.props.dispatch(updateTileLight(row, col - 1, false))
 
         remainingShadowLength--
 
-        if(remainingShadowLength > 0) {
+        if(remainingShadowLength > 0 && col > 1) {
           castLeftShadow(row, col - 1, remainingShadowLength)
         }
       }
