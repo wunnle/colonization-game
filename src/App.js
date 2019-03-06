@@ -4,9 +4,10 @@ import logo from './logo.svg';
 import { startGame } from './actions/general'
 import { increaseEnergy, reduceEnergy } from './actions/players'
 import { updateTileLevel, updateTileOwner, updateTileLight } from './actions/board'
-import { endTurn } from './actions/game'
+import { endTurn, popNotification } from './actions/game'
 import Tile from './components/tile'
 import Planet from './components/Planet'
+import Notification from './components/Notification'
 import { getBuildingPowerOutput, getPlayerId, getUpgradeCost, getShadowLenght } from './gameHelpers'
 
 import './App.css';
@@ -22,6 +23,8 @@ class App extends Component {
     const { dispatch } = this.props
     dispatch(startGame())
   }
+
+  newNotification = (message) => this.props.dispatch(popNotification(message))
 
   createTileRow = (data) => {
     console.log({data})
@@ -117,6 +120,9 @@ class App extends Component {
     const { board, players, dispatch } = this.props
     
     console.log(`🏁 turn ${this.props.wholeTurn}!`)
+    this.newNotification(`Season ${this.props.wholeTurn}!`)
+
+
     
     let gainedEnergies = {
       blue: 0,
@@ -163,19 +169,20 @@ class App extends Component {
 
   render() {
 
-    const { gameStarted, players, wholeTurn, activePlayer, sunDirection } = this.props
+    const { gameStarted, players, wholeTurn, activePlayer, sunDirection, notificationMessage } = this.props
     const { createTileRow, handleEndTurnClick, renderBoard } = this
 
     return (
       <div className="App">
         <header>
-
         {wholeTurn > 0 ? <p>Season {wholeTurn} </p> : <p>Initial state</p>}        
         {gameStarted && <h1>Turn of {activePlayer.name} player</h1>}
         <p>⚡ {activePlayer.energy}</p>
 
         {wholeTurn > 0 && <button onClick={handleEndTurnClick}>End turn</button>}
         </header>
+
+        <Notification>{notificationMessage}</Notification>
         <div className="board-holder">
           <Planet sunDirection={sunDirection}>
             {renderBoard()}
@@ -186,7 +193,6 @@ class App extends Component {
     );
   }
 }
-
 
 const mapStateToProps = function ({ general, players, game, board }) {
   return {
@@ -199,7 +205,8 @@ const mapStateToProps = function ({ general, players, game, board }) {
     activePlayerId: game.activePlayer,
     turn: game.turn,
     wholeTurn: game.wholeTurn,
-    sunDirection: game.sunDirection
+    sunDirection: game.sunDirection,
+    notificationMessage: game.notificationMessage
   }
 }
 
