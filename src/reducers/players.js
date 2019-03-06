@@ -1,11 +1,13 @@
 const initialState = {
   1: {
     name: 'blue',
-    energy: 2
+    energy: 0,
+    id: 1,
   },
   2: {
     name: 'red',
-    energy: 2
+    energy: 0,
+    id: 2
   }
 }
 

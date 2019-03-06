@@ -7,6 +7,7 @@ import { updateTileLevel, updateTileOwner, updateTileLight } from './actions/boa
 import { endTurn } from './actions/game'
 import Tile from './components/tile'
 import Planet from './components/Planet'
+import { getBuildingPowerOutput, getPlayerId, getUpgradeCost, getShadowLenght } from './gameHelpers'
 
 import './App.css';
 
@@ -33,35 +34,9 @@ class App extends Component {
 
     return row
   }
+  
   handleEndTurnClick = () => {
     this.props.dispatch(endTurn())
-  }
-
-  getUpgradeCost = (level) => {
-    switch (level) {
-      case 0:
-        return 1
-      case 1:
-        return 2
-      case 2:
-        return 3
-      default:
-        return 1
-    }
-  }
-
-  getShadowLenght = (level) => {
-    console.log('got level', level)
-    switch (level) {
-      case 0:
-        return 0
-      case 1:
-        return 1
-      case 2:
-        return 2
-      default:
-        return 0
-    }
   }
 
   reduceEnergyOfActivePlayer = reduceBy => this.props.dispatch(reduceEnergy(this.props.activePlayerId, reduceBy))
@@ -94,7 +69,7 @@ class App extends Component {
 
       const currentEnergy = activePlayer.energy
 
-      const upgradeCost = this.getUpgradeCost(currentLevel)
+      const upgradeCost = getUpgradeCost(currentLevel)
 
       if(currentEnergy >= upgradeCost) {
         let newLevel = currentLevel + 1
@@ -115,7 +90,7 @@ class App extends Component {
   }
 
   castShadow = (col, row, sunDirection, buildingLevel) => {
-    const shadowLength = this.getShadowLenght(buildingLevel)
+    const shadowLength = getShadowLenght(buildingLevel)
 
 
     if(sunDirection === 'right') {
@@ -137,6 +112,41 @@ class App extends Component {
     }
   }
 
+  doNewSeasonActions = () => {
+
+    const { board, players, dispatch } = this.props
+    
+    console.log(`🏁 turn ${this.props.wholeTurn}!`)
+    
+    let gainedEnergies = {
+      blue: 0,
+      red: 0
+    }
+
+    for (const i in board) {
+      console.log('👋', board[i])
+      board[i].props.forEach(tile => {
+        if(tile.owner && tile.isBright) {
+          console.log({tile})
+          gainedEnergies[tile.owner]+= getBuildingPowerOutput(tile.level)
+        }
+      })
+    }
+
+    for (let playerName in gainedEnergies) {
+      dispatch(increaseEnergy(getPlayerId(playerName), gainedEnergies[playerName]))  
+    }
+
+    console.log({gainedEnergies})
+  }
+
+
+  componentDidUpdate(prevProps) {
+    if(prevProps.wholeTurn !== this.props.wholeTurn) {
+      this.doNewSeasonActions()
+    }
+  }
+
   renderBoard = () => {
     const { board } = this.props
 
@@ -148,6 +158,8 @@ class App extends Component {
 
     return boardArr
   }
+
+  
 
   render() {
 
