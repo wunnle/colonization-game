@@ -27,36 +27,36 @@ class App extends Component {
   newNotification = (message) => this.props.dispatch(popNotification(message))
 
   createTileRow = (data) => {
-    console.log({data})
+    console.log({ data })
 
     const row = Array(3)
     data.props.forEach((props, i) => {
-      row[i] = <Tile {...props} key={data.name + (i+1)} col={i+1} row={data.name} 
-      handleClick={() => this.handleRowClick({col: (i+1), row: data.name, owner: props.owner })} />
+      row[i] = <Tile {...props} key={data.name + (i + 1)} col={i + 1} row={data.name}
+        handleClick={() => this.handleRowClick({ col: (i + 1), row: data.name, owner: props.owner })} />
     })
 
     return row
   }
-  
+
   handleEndTurnClick = () => {
     this.props.dispatch(endTurn())
   }
 
   reduceEnergyOfActivePlayer = reduceBy => this.props.dispatch(reduceEnergy(this.props.activePlayerId, reduceBy))
 
-  handleRowClick = ({col, row, owner}) => {
+  handleRowClick = ({ col, row, owner }) => {
 
     const { board, players, dispatch, turn, activePlayerId, activePlayer, sunDirection } = this.props
 
-    const updateClickedTileLevel = level => dispatch(updateTileLevel(row, col, level)) 
+    const updateClickedTileLevel = level => dispatch(updateTileLevel(row, col, level))
     const updateClickedTileOwner = owner => dispatch(updateTileOwner(row, col, owner))
 
-    if(owner && activePlayer.name !== owner) {
+    if (owner && activePlayer.name !== owner) {
       console.warn('invalid move! 💀')
       return
     }
 
-    if(turn < 1) {
+    if (turn < 1) {
       updateClickedTileLevel(1)
       updateClickedTileOwner(activePlayer.name)
       this.castShadow(col, row, sunDirection, 1)
@@ -66,16 +66,16 @@ class App extends Component {
 
     const currentLevel = board[row].props[col - 1].level
 
-    if(currentLevel < 3) {
+    if (currentLevel < 3) {
 
       const currentLevel = board[row].props[col - 1].level
 
       const currentEnergy = activePlayer.energy
 
       const upgradeCost = getUpgradeCost(currentLevel)
-      console.log({upgradeCost})
+      console.log({ upgradeCost })
 
-      if(currentEnergy >= upgradeCost) {
+      if (currentEnergy >= upgradeCost) {
         let newLevel = currentLevel + 1
 
         updateClickedTileLevel(newLevel)
@@ -97,7 +97,7 @@ class App extends Component {
     const shadowLength = getShadowLenght(buildingLevel)
 
 
-    if(sunDirection === 'right') {
+    if (sunDirection === 'right') {
 
       let remainingShadowLength = shadowLength
       const castLeftShadow = (row, col, remainingShadowLength) => {
@@ -105,25 +105,25 @@ class App extends Component {
 
         remainingShadowLength--
 
-        if(remainingShadowLength > 0 && col > 1) {
+        if (remainingShadowLength > 0 && col > 1) {
           castLeftShadow(row, col - 1, remainingShadowLength)
         }
       }
 
       castLeftShadow(row, col, remainingShadowLength)
-      
+
     }
   }
 
   doNewSeasonActions = () => {
 
     const { board, players, dispatch } = this.props
-    
+
     console.log(`🏁 turn ${this.props.wholeTurn}!`)
     this.newNotification(`Season ${this.props.wholeTurn}!`)
 
 
-    
+
     let gainedEnergies = {
       blue: 0,
       red: 0
@@ -132,23 +132,23 @@ class App extends Component {
     for (const i in board) {
       console.log('👋', board[i])
       board[i].props.forEach(tile => {
-        if(tile.owner && tile.isBright) {
-          console.log({tile})
-          gainedEnergies[tile.owner]+= getBuildingPowerOutput(tile.level)
+        if (tile.owner && tile.isBright) {
+          console.log({ tile })
+          gainedEnergies[tile.owner] += getBuildingPowerOutput(tile.level)
         }
       })
     }
 
     for (let playerName in gainedEnergies) {
-      dispatch(increaseEnergy(getPlayerId(playerName), gainedEnergies[playerName]))  
+      dispatch(increaseEnergy(getPlayerId(playerName), gainedEnergies[playerName]))
     }
 
-    console.log({gainedEnergies})
+    console.log({ gainedEnergies })
   }
 
 
   componentDidUpdate(prevProps) {
-    if(prevProps.wholeTurn !== this.props.wholeTurn) {
+    if (prevProps.wholeTurn !== this.props.wholeTurn) {
       this.doNewSeasonActions()
     }
   }
@@ -158,14 +158,14 @@ class App extends Component {
 
     let boardArr = []
 
-    for(var row in board) {
+    for (var row in board) {
       boardArr.push(this.createTileRow(board[row]))
     }
 
     return boardArr
   }
 
-  
+
 
   render() {
 
@@ -175,11 +175,11 @@ class App extends Component {
     return (
       <div className="App">
         <header>
-        {wholeTurn > 0 ? <p>Season {wholeTurn} </p> : <p>Initial state</p>}        
-        {gameStarted && <h1>Turn of {activePlayer.name} player</h1>}
-        <p>⚡ {activePlayer.energy}</p>
-
-        {wholeTurn > 0 && <button onClick={handleEndTurnClick}>End turn</button>}
+          <div className='header__inner'>
+            {wholeTurn > 0 ? <p>Season {wholeTurn} </p> : <p>Initial state</p>}
+            {gameStarted && <h1>Turn of {activePlayer.name} player</h1>}
+            <p>⚡ {activePlayer.energy}</p></div>
+          <div className='button__holder'>{wholeTurn > 0 && <button onClick={handleEndTurnClick}>End turn</button>}</div>
         </header>
 
         <Notification>{notificationMessage}</Notification>
@@ -188,7 +188,7 @@ class App extends Component {
             {renderBoard()}
           </Planet>
         </div>
-        
+
       </div>
     );
   }
