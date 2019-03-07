@@ -12,10 +12,12 @@ const Building = ({ owner, level }) => {
   return (
     <div className={`building building--${owner} level--${level}`}>
       <span className="building-inner">
+        <div className="building-itself">
         {(level === 0) && '-'}
         {(level === 1) && '🌱'}
         {(level === 2) && '🏠'}
         {(level === 3) && '🚀'}
+        </div>
       </span>
       <span className="building-shadow">
       </span>
