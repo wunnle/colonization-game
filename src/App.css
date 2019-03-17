@@ -150,16 +150,17 @@ header button {
 }
 
 .planet .building.level--1 .building-shadow {
-  width: 180px;
+  width: 140px;
 }
 
 .planet .building.level--2 .building-shadow {
-  width: 280px;
+  width: 240px;
 }
 
 .planet .building .building-shadow {
   transform: rotate(var(--shadowAngle));
-  transform-origin: 141px center
+  transform-origin: right;
+  margin-right: 40px;
 }
 
 /* .planet.sun-right .building .building-shadow {

@@ -125,7 +125,7 @@ class App extends Component {
         remainingShadowLength--
   
         if (remainingShadowLength > 0 && row > 1) {
-          castShadow(row, row - 1, remainingShadowLength)
+          castShadow(row - 1, col, remainingShadowLength)
         }
       }
 
@@ -136,7 +136,7 @@ class App extends Component {
         remainingShadowLength--
   
         if (remainingShadowLength > 0 && row < 6) {
-          castShadow(row, row + 1, remainingShadowLength)
+          castShadow(row + 1, col, remainingShadowLength)
         }
       }
 
