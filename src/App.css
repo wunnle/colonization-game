@@ -59,9 +59,9 @@ header button {
   width: 600px;
   display: flex;
   flex-wrap: wrap;
-  border-color: yellow;
+  border-color: #282c34;
   border-style: solid;
-  border-width: 0;
+  border-width: 10px;
   background: url('./img/original.jpg');
   flex-wrap: wrap;
   transform: rotateX(45deg) translateY(0) translateZ(140px);
@@ -69,19 +69,19 @@ header button {
 }
 
 .planet.sun-right {
-  border-right-width: 10px;
+  border-right-color: yellow;
 }
 
 .planet.sun-down {
-  border-bottom-width: 10px;
+  border-bottom-color: yellow;
 }
 
 .planet.sun-up {
-  border-top-width: 10px;
+  border-top-color: yellow;
 }
 
 .planet.sun-left {
-  border-left-width: 10px;
+  border-left-color: yellow;
 }
 
 .planet .building {
