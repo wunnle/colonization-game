@@ -26,11 +26,12 @@ class App extends Component {
 
   newNotification = (message) => this.props.dispatch(popNotification(message))
 
-  createTileRow = (data) => {
+  createTileRow = (data, rowIndex) => {
+    console.log({data})
     const row = Array(3)
-    data.props.forEach((props, i) => {
-      row[i] = <Tile {...props} key={data.name + (i + 1)} col={i + 1} row={data.name}
-        handleClick={() => this.handleRowClick({ col: (i + 1), row: Number(data.name), owner: props.owner })} />
+    data.forEach((props, i) => {
+      row[i] = <Tile {...props} key={`row${rowIndex}` + (i + 1)} col={i + 1} row={data.name}
+        handleClick={() => this.handleRowClick({ col: (i + 1), row: Number(rowIndex + 1), owner: props.owner })} />
     })
 
     return row
@@ -62,11 +63,11 @@ class App extends Component {
       return
     }
 
-    const currentLevel = board[row].props[col - 1].level
+    const currentLevel = board[row - 1][col - 1].level
 
     if (currentLevel < 3) {
 
-      const currentLevel = board[row].props[col - 1].level
+      const currentLevel = board[row - 1][col - 1].level
 
       const currentEnergy = activePlayer.energy
 
@@ -154,6 +155,10 @@ class App extends Component {
 
   }
 
+  resetShadows = () => {
+    
+  }
+
   doNewSeasonActions = () => {
 
     const { board, players, wholeTurn, dispatch } = this.props
@@ -173,13 +178,13 @@ class App extends Component {
       red: 0
     }
 
-    for (const i in board) {
-      board[i].props.forEach(tile => {
+    board.forEach(row => {
+      row.forEach(tile => {
         if (tile.owner && tile.level > tile.shadowLevel) {
           gainedEnergies[tile.owner] += getBuildingPowerOutput(tile.level)
         }
       })
-    }
+    })
 
     for (let playerName in gainedEnergies) {
       dispatch(increaseEnergy(getPlayerId(playerName), gainedEnergies[playerName]))
@@ -200,9 +205,7 @@ class App extends Component {
 
     let boardArr = []
 
-    for (var row in board) {
-      boardArr.push(this.createTileRow(board[row]))
-    }
+    board.forEach((row, i) => boardArr.push(this.createTileRow(row, i)))
 
     return boardArr
   }
