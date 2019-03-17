@@ -30,7 +30,7 @@ class App extends Component {
     const row = Array(3)
     data.props.forEach((props, i) => {
       row[i] = <Tile {...props} key={data.name + (i + 1)} col={i + 1} row={data.name}
-        handleClick={() => this.handleRowClick({ col: (i + 1), row: data.name, owner: props.owner })} />
+        handleClick={() => this.handleRowClick({ col: (i + 1), row: Number(data.name), owner: props.owner })} />
     })
 
     return row
@@ -91,21 +91,57 @@ class App extends Component {
   }
 
   castShadow = (col, row, sunDirection, buildingLevel) => {
+    console.log(`will cast shadow on col: ${col}, row: ${row} `)
     const shadowLength = getShadowLenght(buildingLevel)
     const shadowIntensity = getShadowIntensity(buildingLevel)
-
     let remainingShadowLength = shadowLength
-    const castLeftShadow = (row, col, remainingShadowLength) => {
-      col > 1 && this.props.dispatch(updateTileLight(row, col - 1, shadowIntensity))
+    
+    const castShadow = (row, col, remainingShadowLength) => {
 
-      remainingShadowLength--
-
-      if (remainingShadowLength > 0 && col > 1) {
-        castLeftShadow(row, col - 1, remainingShadowLength)
+      if(sunDirection === 'right') {
+        col > 1 && this.props.dispatch(updateTileLight(row, col - 1, shadowIntensity))
+  
+        remainingShadowLength--
+  
+        if (remainingShadowLength > 0 && col > 1) {
+          castShadow(row, col - 1, remainingShadowLength)
+        }
       }
+
+      if(sunDirection === 'left') {
+        col < 6 && this.props.dispatch(updateTileLight(row, col + 1, shadowIntensity))
+  
+        remainingShadowLength--
+  
+        if (remainingShadowLength > 0 && col < 6) {
+          castShadow(row, col + 1, remainingShadowLength)
+        }
+      }
+
+      if(sunDirection === 'down') {
+        row > 1 && this.props.dispatch(updateTileLight(row - 1 , col, shadowIntensity))
+  
+        remainingShadowLength--
+  
+        if (remainingShadowLength > 0 && row > 1) {
+          castShadow(row, row - 1, remainingShadowLength)
+        }
+      }
+
+      if(sunDirection === 'up') {
+        row < 6 && this.props.dispatch(updateTileLight(row + 1 , col, shadowIntensity))
+        //updateTileLight(row + 1, col, shadowIntensity)
+  
+        remainingShadowLength--
+  
+        if (remainingShadowLength > 0 && row < 6) {
+          castShadow(row, row + 1, remainingShadowLength)
+        }
+      }
+
     }
 
-    castLeftShadow(row, col, remainingShadowLength)
+    castShadow(row, col, remainingShadowLength)
   }
 
   rotateSun = () => {

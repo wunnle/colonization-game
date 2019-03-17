@@ -5,12 +5,19 @@ export const updateTileLevel = (row, col, level) => ({
   }
 })
 
-export const updateTileLight = (row, col, shadowLevel) => ({
-  type: 'UPDATE_TILE_LIGHT',
-  payload: {
-    row, col, shadowLevel
-  }
-})
+export const updateTileLight = (row, col, shadowLevel) => {
+  console.log(`will update light on row: ${row}, col: ${col}`)
+  return ({
+    type: 'UPDATE_TILE_LIGHT',
+    payload: {
+      row, col, shadowLevel
+    }
+  })
+
+}
+
+
+
 
 export const updateTileOwner = (row, col, owner) => ({
   type: 'UPDATE_TILE_OWNER',
