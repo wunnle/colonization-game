@@ -25,6 +25,12 @@ export default function general(state = initialState, action) {
         notificationMessage: action.payload.message
       }
 
+    case 'ROTATE_SUN':
+      return {
+        ...state,
+        sunDirection: action.payload.sunDirection
+      }
+
     default:
       return state
   }

@@ -4,11 +4,11 @@ import logo from './logo.svg';
 import { startGame } from './actions/general'
 import { increaseEnergy, reduceEnergy } from './actions/players'
 import { updateTileLevel, updateTileOwner, updateTileLight } from './actions/board'
-import { endTurn, popNotification } from './actions/game'
+import { endTurn, popNotification, rotateSun } from './actions/game'
 import Tile from './components/tile'
 import Planet from './components/Planet'
 import Notification from './components/Notification'
-import { getBuildingPowerOutput, getPlayerId, getUpgradeCost, getShadowLenght } from './gameHelpers'
+import { getBuildingPowerOutput, getPlayerId, getUpgradeCost, getShadowLenght, getNextSunDirection } from './gameHelpers'
 
 import './App.css';
 
@@ -27,8 +27,6 @@ class App extends Component {
   newNotification = (message) => this.props.dispatch(popNotification(message))
 
   createTileRow = (data) => {
-    console.log({ data })
-
     const row = Array(3)
     data.props.forEach((props, i) => {
       row[i] = <Tile {...props} key={data.name + (i + 1)} col={i + 1} row={data.name}
@@ -73,7 +71,6 @@ class App extends Component {
       const currentEnergy = activePlayer.energy
 
       const upgradeCost = getUpgradeCost(currentLevel)
-      console.log({ upgradeCost })
 
       if (currentEnergy >= upgradeCost) {
         let newLevel = currentLevel + 1
@@ -115,9 +112,20 @@ class App extends Component {
     }
   }
 
+  rotateSun = () => {
+    const { sunDirection, dispatch } = this.props
+
+    dispatch(rotateSun(getNextSunDirection(sunDirection)))  
+  }
+
   doNewSeasonActions = () => {
 
-    const { board, players, dispatch } = this.props
+    const { board, players, wholeTurn, dispatch } = this.props
+
+    if(wholeTurn > 1) {
+      console.log(`this is season ${wholeTurn}. rotating sun`)
+      this.rotateSun()
+    }
 
     console.log(`🏁 turn ${this.props.wholeTurn}!`)
     this.newNotification(`Season ${this.props.wholeTurn}!`)
@@ -130,10 +138,8 @@ class App extends Component {
     }
 
     for (const i in board) {
-      console.log('👋', board[i])
       board[i].props.forEach(tile => {
         if (tile.owner && tile.isBright) {
-          console.log({ tile })
           gainedEnergies[tile.owner] += getBuildingPowerOutput(tile.level)
         }
       })
@@ -143,7 +149,7 @@ class App extends Component {
       dispatch(increaseEnergy(getPlayerId(playerName), gainedEnergies[playerName]))
     }
 
-    console.log({ gainedEnergies })
+    console.table({ gainedEnergies })
   }
 
 

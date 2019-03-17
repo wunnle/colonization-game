@@ -38,6 +38,7 @@ const initialState = {
 
 export default function general(state = initialState, action) {
   switch (action.type) {
+
     case 'UPDATE_TILE_LEVEL':
 
       return {

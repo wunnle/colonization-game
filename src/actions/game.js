@@ -8,3 +8,10 @@ export const popNotification = message => ({
     message
   }
 })
+
+export const rotateSun = (sunDirection) => ({
+  type: 'ROTATE_SUN',
+  payload: {
+    sunDirection
+  }
+})
