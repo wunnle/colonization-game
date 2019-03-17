@@ -8,7 +8,7 @@ import { endTurn, popNotification, rotateSun } from './actions/game'
 import Tile from './components/tile'
 import Planet from './components/Planet'
 import Notification from './components/Notification'
-import { getBuildingPowerOutput, getPlayerId, getUpgradeCost, getShadowLenght, getNextSunDirection } from './gameHelpers'
+import { getBuildingPowerOutput, getPlayerId, getUpgradeCost, getShadowLenght, getNextSunDirection, getShadowIntensity } from './gameHelpers'
 
 import './App.css';
 
@@ -80,7 +80,7 @@ class App extends Component {
         this.reduceEnergyOfActivePlayer(upgradeCost)
 
         // set shadow 
-
+        console.log('casting shadow for level ' + newLevel)
         this.castShadow(col, row, sunDirection, newLevel)
 
       } else {
@@ -92,30 +92,30 @@ class App extends Component {
 
   castShadow = (col, row, sunDirection, buildingLevel) => {
     const shadowLength = getShadowLenght(buildingLevel)
+    const shadowIntensity = getShadowIntensity(buildingLevel)
 
+    let remainingShadowLength = shadowLength
+    const castLeftShadow = (row, col, remainingShadowLength) => {
+      col > 1 && this.props.dispatch(updateTileLight(row, col - 1, shadowIntensity))
 
-    if (sunDirection === 'right') {
+      remainingShadowLength--
 
-      let remainingShadowLength = shadowLength
-      const castLeftShadow = (row, col, remainingShadowLength) => {
-        col > 1 && this.props.dispatch(updateTileLight(row, col - 1, false))
-
-        remainingShadowLength--
-
-        if (remainingShadowLength > 0 && col > 1) {
-          castLeftShadow(row, col - 1, remainingShadowLength)
-        }
+      if (remainingShadowLength > 0 && col > 1) {
+        castLeftShadow(row, col - 1, remainingShadowLength)
       }
-
-      castLeftShadow(row, col, remainingShadowLength)
-
     }
+
+    castLeftShadow(row, col, remainingShadowLength)
   }
 
   rotateSun = () => {
     const { sunDirection, dispatch } = this.props
 
     dispatch(rotateSun(getNextSunDirection(sunDirection)))  
+  }
+
+  recalculateShadows = () => {
+
   }
 
   doNewSeasonActions = () => {
@@ -139,7 +139,7 @@ class App extends Component {
 
     for (const i in board) {
       board[i].props.forEach(tile => {
-        if (tile.owner && tile.isBright) {
+        if (tile.owner && tile.level > tile.shadowLevel) {
           gainedEnergies[tile.owner] += getBuildingPowerOutput(tile.level)
         }
       })

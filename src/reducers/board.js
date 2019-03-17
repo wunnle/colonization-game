@@ -3,7 +3,7 @@ import update from 'immutability-helper';
 const defaultRowProp = {
   level: null,
   owner: '',
-  isBright: true
+  shadowLevel: 0
 }
 
 const numberOfCols = 6
@@ -80,8 +80,8 @@ export default function general(state = initialState, action) {
           ...state[action.payload.row],
           props: update(state[action.payload.row].props, {
             [action.payload.col - 1]: {
-              isBright: {
-                $set: action.payload.isBright
+              shadowLevel: {
+                $set: action.payload.shadowLevel
               }
             }
           })

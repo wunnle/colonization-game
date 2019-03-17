@@ -152,11 +152,25 @@ header button {
 
 
 .planet .tile--dark {
-  background: #64c568;
+  /* background: #64c568; */
+  background: rgba(0, 0, 0, 0.7)
+
 }
 
-.planet .tile--bright {
+.planet .tile.shadowLevel--0 {
   background: rgba(121, 245, 125, 0.5607843137254902);
+}
+
+.planet .tile.shadowLevel--1 {
+  background: rgba(0, 0, 0, 0.4)
+}
+
+.planet .tile.shadowLevel--2 {
+  background: rgba(0, 0, 0, 0.7)
+}
+
+.planet .tile.shadowLevel--3 {
+  background: rgba(0, 0, 0, 1)
 }
 
 .App-logo {

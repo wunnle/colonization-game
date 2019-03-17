@@ -5,10 +5,10 @@ export const updateTileLevel = (row, col, level) => ({
   }
 })
 
-export const updateTileLight = (row, col, isBright) => ({
+export const updateTileLight = (row, col, shadowLevel) => ({
   type: 'UPDATE_TILE_LIGHT',
   payload: {
-    row, col, isBright
+    row, col, shadowLevel
   }
 })
 
