@@ -65,42 +65,12 @@ export default function general(state = initialState, action) {
 
     case 'RESET_SHADOWS':
 
-      for (let row in state) {
-
-      }
-
-      return {
-        ...state,
-
-
-        1: {
-          name: '1',
-          props: state['1'].props.map(prop => {
-            prop.shadowLevel = 0
-            return prop
-          })
-        },
-        2: {
-          name: '2',
-          props: new Array(numberOfCols).fill(null).map(() => ({ ...defaultRowProp }))
-        },
-        3: {
-          name: '3',
-          props: new Array(numberOfCols).fill(null).map(() => ({ ...defaultRowProp }))
-        },
-        4: {
-          name: '4',
-          props: new Array(numberOfCols).fill(null).map(() => ({ ...defaultRowProp }))
-        },
-        5: {
-          name: '5',
-          props: new Array(numberOfCols).fill(null).map(() => ({ ...defaultRowProp }))
-        },
-        6: {
-          name: '6',
-          props: new Array(numberOfCols).fill(null).map(() => ({ ...defaultRowProp }))
-        }
-      }
+      return [...state.map(row => {
+        return row.map(tile => {
+          tile.shadowLevel = 0
+          return tile
+        })
+      })]
 
     default:
       return state

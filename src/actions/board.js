@@ -13,11 +13,11 @@ export const updateTileLight = (row, col, shadowLevel) => {
       row, col, shadowLevel
     }
   })
-
 }
 
-
-
+export const resetShadows = () => ({
+  type: 'RESET_SHADOWS'
+})
 
 export const updateTileOwner = (row, col, owner) => ({
   type: 'UPDATE_TILE_OWNER',

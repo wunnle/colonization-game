@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import logo from './logo.svg';
 import { startGame } from './actions/general'
 import { increaseEnergy, reduceEnergy } from './actions/players'
-import { updateTileLevel, updateTileOwner, updateTileLight } from './actions/board'
+import { updateTileLevel, updateTileOwner, updateTileLight, resetShadows } from './actions/board'
 import { endTurn, popNotification, rotateSun } from './actions/game'
 import Tile from './components/tile'
 import Planet from './components/Planet'
@@ -148,15 +148,31 @@ class App extends Component {
   rotateSun = () => {
     const { sunDirection, dispatch } = this.props
 
+    const currentAngle = Number(getComputedStyle(document.body).getPropertyValue('--shadowAngle').match(/\d/g).join(""))
+
+    document.querySelector('body').style.setProperty('--shadowAngle', currentAngle + 90 + "deg");
+
+
     dispatch(rotateSun(getNextSunDirection(sunDirection)))  
   }
 
   recalculateShadows = () => {
+    const { board, sunDirection } = this.props
+
+    const nextSunDirection = getNextSunDirection(sunDirection)
+
+    board.forEach((row, rowIndex) => {
+      row.forEach((tile, colIndex) => {
+        if(tile.level > 0) {
+          this.castShadow(colIndex + 1, rowIndex + 1, nextSunDirection, tile.level)
+        }
+      })
+    })
 
   }
 
   resetShadows = () => {
-    
+    this.props.dispatch(resetShadows())
   }
 
   doNewSeasonActions = () => {
@@ -166,6 +182,8 @@ class App extends Component {
     if(wholeTurn > 1) {
       console.log(`this is season ${wholeTurn}. rotating sun`)
       this.rotateSun()
+      this.resetShadows()
+      this.recalculateShadows()
     }
 
     console.log(`🏁 turn ${this.props.wholeTurn}!`)
