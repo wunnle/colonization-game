@@ -62,26 +62,35 @@ header button {
   border-color: #282c34;
   border-style: solid;
   border-width: 10px;
-  background: url('./img/original.jpg');
-  flex-wrap: wrap;
+  /* background: url('./img/original.jpg'); */
   transform: rotateX(45deg) translateY(0) translateZ(140px);
   transform-style: preserve-3d;
+  transition: background-color 0.3s ease;
+}
+
+.planet__inner {
+  display: flex;
+  flex-wrap: wrap;
 }
 
 .planet.sun-right {
   border-right-color: yellow;
+  background: linear-gradient(to left, #3f0 1%, #878f77 57%);
 }
 
 .planet.sun-down {
   border-bottom-color: yellow;
+  background: linear-gradient(to top, #3f0 1%, #878f77 57%);
 }
 
 .planet.sun-up {
   border-top-color: yellow;
+  background: linear-gradient(to bottom, #3f0 1%, #878f77 57%);
 }
 
 .planet.sun-left {
   border-left-color: yellow;
+  background: linear-gradient(to right, #3f0 1%, #878f77 57%);
 }
 
 .planet .building {
