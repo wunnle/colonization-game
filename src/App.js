@@ -239,7 +239,7 @@ class App extends Component {
       <div className="App">
         <header>
           <div className='header__inner'>
-            {wholeTurn > 0 ? <p>Season {wholeTurn} </p> : <p>Initial state</p>}
+            {wholeTurn > 0 ? <p>Season {wholeTurn} </p> : <p>Preparation stage</p>}
             {gameStarted && <h1>Turn of {activePlayer.name} player</h1>}
             <p>⚡ {activePlayer.energy}</p></div>
           <div className='button__holder'>{wholeTurn > 0 && <button onClick={handleEndTurnClick}>End turn</button>}</div>
