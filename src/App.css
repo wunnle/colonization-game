@@ -55,8 +55,6 @@ header button {
 }
 
 .planet {
-  height: 600px;
-  width: 600px;
   display: flex;
   flex-wrap: wrap;
   border-color: #282c34;
@@ -191,42 +189,6 @@ header button {
   transform: rotate(270deg);
   transform-origin: 141px center
 } */
-
-.planet .tile {
-    width: 100px;
-    height: 100px;
-    border: 3px solid#282c34;
-    background: white;
-    box-sizing: border-box;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 45px;
-    color: black;
-}
-
-
-.planet .tile--dark {
-  /* background: #64c568; */
-  background: rgba(0, 0, 0, 0.7)
-
-}
-
-.planet .tile.shadowLevel--0 {
-  background: rgba(121, 245, 125, 0.5607843137254902);
-}
-
-.planet .tile.shadowLevel--1 {
-  background: rgba(121, 245, 125, 0.3);
-}
-
-.planet .tile.shadowLevel--2 {
-  background: rgba(121, 245, 125, 0.1);
-}
-
-.planet .tile.shadowLevel--3 {
-  background: rgba(121, 245, 125, 0.05);
-}
 
 .App-logo {
   animation: App-logo-spin infinite 20s linear;
