@@ -16,8 +16,8 @@ const AppWithStore = () => (
 
 const rootElement = document.getElementById("root");
 
-render(<AppWithStore/>, rootElement)
-//render(<TestTile/>, rootElement)
+//render(<AppWithStore/>, rootElement)
+render(<TestTile/>, rootElement)
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.

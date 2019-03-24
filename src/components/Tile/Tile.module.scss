@@ -10,7 +10,7 @@
 .tile {
   width: 100px;
   height: 100px;
-  border: 3px solid#282c34;
+  //border: 3px solid#282c34;
   background: white;
   box-sizing: border-box;
   display: flex;
@@ -33,17 +33,28 @@
 }
 
 .tileS {
-  // transform: rotateX(76deg);
-  // background: white;
-  // @extend %tileSide;
-  // bottom: 0;
-  // border: 2px solid yellow;
-  // box-sizing: border-box;
-  // margin-top: auto;
+  transform: rotateX(90deg) translateY(0);
+  transform-origin: bottom center;
+  @extend %tileSide;
+  background: white;
+  bottom: 0;
+  box-sizing: border-box;
+  box-sizing: border-box;
+  margin-top: auto;
+  height: 30px;
 }
 
 .tileW {
-
+  transform: rotateY(270deg) translateX(-100%);
+	transform-origin: center left;
+  @extend %tileSide;
+  background: white;
+  bottom: 0;
+  box-sizing: border-box;
+  box-sizing: border-box;
+  margin-top: auto;
+  height: 100%;
+  width: 30px;
 }
 
 .tileE {
