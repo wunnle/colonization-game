@@ -32,9 +32,11 @@
 .sideTop {
   box-sizing: border-box;
   @extend %tileSide;
-  background: #8be99b;
+  background: rgba(150, 205, 159, 0.2901960784313726);
   transform: translateZ(0);
-  opacity: 0.4;
+  opacity: 1;
+  border: 1px solid #4fa95f;
+
 }
 
 .side1 {

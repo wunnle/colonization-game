@@ -177,10 +177,13 @@ header button {
   width: 280px;
 }
 
+.planet .building.level--3 .building-shadow {
+  width: 380px;
+}
+
 .planet .building .building-shadow {
-  transform-origin: right;
   transform: translateZ(1px) translateX(0) rotate(var(--shadowAngle));
-  transform-origin: 140px 40px;
+  transform-origin: calc(100% - 40px) 40px;
   margin-right: 10px;
 }
 
@@ -229,4 +232,10 @@ header button {
 
 input[type='range'] {
   width: 200px;
+}
+
+.controls {
+  position: fixed;
+  left: 0;
+  top: 0;
 }

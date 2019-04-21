@@ -4,7 +4,7 @@ export const Controls = () => {
   const [xAngle, setXAngle] = useState(45);
   document.documentElement.style.setProperty('--planet-z-angle', zAngle + "deg");
   document.documentElement.style.setProperty('--planet-x-angle', xAngle + "deg");
-  return (<div>
+  return (<div className='controls'>
     <label htmlFor="">Z Angle: {zAngle} </label>
     <input type="range" min="0" max="360" value={zAngle} onChange={(e) => setZAngle(e.target.value)} />
     <br />
