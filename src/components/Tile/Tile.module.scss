@@ -25,42 +25,17 @@
   
 }
 
+.tileHolder {
+  position: relative;
+}
+
 .sideTop {
   box-sizing: border-box;
   @extend %tileSide;
   background: #8be99b;
   transform: translateZ(0);
+  opacity: 0.4;
 }
-
-.tileHolder {
-  position: relative;
-}
-
-// .side1 {
-//   transform: rotateY(270deg) translateX(-100%);
-// 	transform-origin: center left;
-//   @extend %tileSide;
-//   background: yellow;
-//   bottom: 0;
-//   box-sizing: border-box;
-//   box-sizing: border-box;
-//   margin-top: auto;
-//   height: 100%;
-//   width: 30px;
-// }
-
-// .side2 {
-//   transform: rotateY(270deg) rotateX(90deg) translateX(-100%) translateY(-50%) translateZ(50px);
-// 	transform-origin: center left;
-//   @extend %tileSide;
-//   background: yellowgreen;
-//   bottom: 0;
-//   box-sizing: border-box;
-//   box-sizing: border-box;
-//   margin-top: auto;
-//   height: 100%;
-//   width: 30px;
-// }
 
 .side1 {
   @extend %tileSide;
