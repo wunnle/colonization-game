@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import styles, { tile, tileHolder, tileN, tileS, tileW, tileE, tileTop } from './Tile.module.scss'
+import styles, { tile, tileHolder, side1, side2, side3, side4, sideTop } from './Tile.module.scss'
 
 const Tile = ({ level = 0, owner, handleClick, shadowLevel }) => {
   return (
@@ -32,11 +32,12 @@ const TileHolder = ({ children, handleClick, shadowLevel }) => {
   return (
     <div className={tileHolder}>
       <div className={`${tile} ${shadowLevels[shadowLevel]}`} onClick={handleClick}>
-        <div className={tileTop}>{children}</div>
-        <div className={tileN}></div>
-        <div className={tileS}></div>
-        <div className={tileE}></div>
-        <div className={tileW}></div>
+        {children}
+        <div className={sideTop}></div>
+        <div className={side1}>1</div>
+        <div className={side2}>2</div>
+        <div className={side3}>3</div>
+        <div className={side4}></div>
       </div>
     </div>
   )

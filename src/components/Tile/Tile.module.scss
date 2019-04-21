@@ -4,6 +4,8 @@
   top: 0;
   width: 100%;
   height: 100%;
+  backface-visibility: hidden;
+
 }
 
 
@@ -20,45 +22,73 @@
   color: black;
 }
 
-.tileTop {
+.sideTop {
   box-sizing: border-box;
+  @extend %tileSide;
+  background: red !important;
+  transform: translateZ(0);
 }
 
 .tileHolder {
   position: relative;
 }
 
-.tileN {
-  transform: rotateY(90deg)
-}
+// .side1 {
+//   transform: rotateY(270deg) translateX(-100%);
+// 	transform-origin: center left;
+//   @extend %tileSide;
+//   background: yellow;
+//   bottom: 0;
+//   box-sizing: border-box;
+//   box-sizing: border-box;
+//   margin-top: auto;
+//   height: 100%;
+//   width: 30px;
+// }
 
-.tileS {
-  transform: rotateX(90deg) translateY(0);
-  transform-origin: bottom center;
-  @extend %tileSide;
-  background: white;
-  bottom: 0;
-  box-sizing: border-box;
-  box-sizing: border-box;
-  margin-top: auto;
-  height: 30px;
-}
+// .side2 {
+//   transform: rotateY(270deg) rotateX(90deg) translateX(-100%) translateY(-50%) translateZ(50px);
+// 	transform-origin: center left;
+//   @extend %tileSide;
+//   background: yellowgreen;
+//   bottom: 0;
+//   box-sizing: border-box;
+//   box-sizing: border-box;
+//   margin-top: auto;
+//   height: 100%;
+//   width: 30px;
+// }
 
-.tileW {
-  transform: rotateY(270deg) translateX(-100%);
-	transform-origin: center left;
+.side1 {
   @extend %tileSide;
-  background: white;
-  bottom: 0;
-  box-sizing: border-box;
-  box-sizing: border-box;
-  margin-top: auto;
-  height: 100%;
+  background: yellow;
   width: 30px;
+  transform: translateX(-30px) rotateY(-90deg);
+  transform-origin: right center;
 }
 
-.tileE {
+.side2 {
+  @extend %tileSide;
+  background: blue;
+  height: 30px;
+  transform: translateY(-30px) rotateX(90deg);
+  transform-origin: bottom center;
+}
 
+.side3 {
+  @extend %tileSide;
+  background: white;
+  height: 30px;
+  transform: translateY(100px) rotateX(-90deg);
+  transform-origin: top center;
+}
+
+.side4 {
+  @extend %tileSide;
+  background: purple;
+  width: 30px;
+  transform: translateX(100px) rotateY(90deg);
+  transform-origin: left center;
   
 }
 
