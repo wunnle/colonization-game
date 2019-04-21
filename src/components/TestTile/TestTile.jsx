@@ -22,7 +22,7 @@ const TestTile = () => {
       <input type="range" min="0" max="360" value={xAngle} onChange={(e) => setXAngle(e.target.value)} />
       <div className="board-holder">
         <Planet sunDirection='right'>
-          <Tile level={1} shadowLevel={0}></Tile>
+          <Tile level={2} owner='red' shadowLevel={0}></Tile>
           <Tile level={1} shadowLevel={0}></Tile>
           <Tile level={1} shadowLevel={0}></Tile>
           <Tile level={1} shadowLevel={0}></Tile>

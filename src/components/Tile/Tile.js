@@ -12,14 +12,13 @@ const Tile = ({ level = 0, owner, handleClick, shadowLevel }) => {
 const Building = ({ owner, level }) => {
   return (
     <div className={`building building--${owner} level--${level}`}>
-      <span className="building-inner">
-        <div className="building-itself">
-          {(level === 0) && ''}
-          {(level === 1) && '🌱'}
-          {(level === 2) && '🏠'}
-          {(level === 3) && '🚀'}
-        </div>
-      </span>
+      <span className="building-circle"></span>
+      <div className="building-itself">
+        {(level === 0) && ''}
+        {(level === 1) && '🌱'}
+        {(level === 2) && '🏠'}
+        {(level === 3) && '🚀'}
+      </div>
       <span className="building-shadow">
       </span>
     </div>
@@ -30,14 +29,14 @@ const shadowLevels = [styles.shadowLevel0, styles.shadowLevel1, styles.shadowLev
 
 const TileHolder = ({ children, handleClick, shadowLevel }) => {
   return (
-      <div className={`${tile} ${shadowLevels[shadowLevel]}`} onClick={handleClick}>
-        {/* {children} */}
-        <div className={sideTop}></div>
-        <div className={side1}>1</div>
-        <div className={side2}>2</div>
-        <div className={side3}>3</div>
-        <div className={side4}>4</div>
-      </div>
+    <div className={`${tile} ${shadowLevels[shadowLevel]}`} onClick={handleClick}>
+      {children}
+      <div className={sideTop}></div>
+      <div className={side1}>1</div>
+      <div className={side2}>2</div>
+      <div className={side3}>3</div>
+      <div className={side4}>4</div>
+    </div>
   )
 }
 

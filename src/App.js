@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, {  Component } from 'react';
 import { connect } from 'react-redux'
 import logo from './logo.svg';
 import { startGame } from './actions/general'
@@ -234,6 +234,10 @@ class App extends Component {
 
     const { gameStarted, players, wholeTurn, activePlayer, sunDirection, notificationMessage } = this.props
     const { createTileRow, handleEndTurnClick, renderBoard } = this
+  
+    document.documentElement.style.setProperty('--planet-z-angle', "0deg");
+    document.documentElement.style.setProperty('--planet-x-angle', "45deg");
+
 
     return (
       <div className="App">
