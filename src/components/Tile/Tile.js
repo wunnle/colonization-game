@@ -30,16 +30,14 @@ const shadowLevels = [styles.shadowLevel0, styles.shadowLevel1, styles.shadowLev
 
 const TileHolder = ({ children, handleClick, shadowLevel }) => {
   return (
-    <div className={tileHolder}>
       <div className={`${tile} ${shadowLevels[shadowLevel]}`} onClick={handleClick}>
-        {children}
+        {/* {children} */}
         <div className={sideTop}></div>
         <div className={side1}>1</div>
         <div className={side2}>2</div>
         <div className={side3}>3</div>
-        <div className={side4}></div>
+        <div className={side4}>4</div>
       </div>
-    </div>
   )
 }
 

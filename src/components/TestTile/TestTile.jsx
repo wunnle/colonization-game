@@ -23,6 +23,9 @@ const TestTile = () => {
       <div className="board-holder">
         <Planet sunDirection='right'>
           <Tile level={1} shadowLevel={0}></Tile>
+          <Tile level={1} shadowLevel={0}></Tile>
+          <Tile level={1} shadowLevel={0}></Tile>
+          <Tile level={1} shadowLevel={0}></Tile>
         </Planet>
       </div>
     </div>

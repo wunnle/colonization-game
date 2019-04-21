@@ -58,8 +58,6 @@ header button {
   display: flex;
   flex-wrap: wrap;
   border-color: #282c34;
-  border-style: solid;
-  border-width: 10px;
   /* background: url('./img/original.jpg'); */
   transform: rotateX(var(--planet-x-angle)) translateY(0) translateZ(140px) rotateZ(var(--planet-z-angle));
   transform-style: preserve-3d;
