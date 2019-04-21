@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, {  Component } from 'react';
 import { connect } from 'react-redux'
 import logo from './logo.svg';
 import { startGame } from './actions/general'
@@ -11,6 +11,7 @@ import Notification from './components/Notification'
 import { getBuildingPowerOutput, getPlayerId, getUpgradeCost, getShadowLenght, getNextSunDirection, getShadowIntensity } from './gameHelpers'
 
 import './App.css';
+import { Controls } from './components/TestTile/Controls';
 
 const defaultRowProp = {
   level: null,
@@ -234,6 +235,10 @@ class App extends Component {
 
     const { gameStarted, players, wholeTurn, activePlayer, sunDirection, notificationMessage } = this.props
     const { createTileRow, handleEndTurnClick, renderBoard } = this
+  
+    document.documentElement.style.setProperty('--planet-z-angle', "0deg");
+    document.documentElement.style.setProperty('--planet-x-angle', "45deg");
+
 
     return (
       <div className="App">
@@ -244,6 +249,7 @@ class App extends Component {
             <p>⚡ {activePlayer.energy}</p></div>
           <div className='button__holder'>{wholeTurn > 0 && <button onClick={handleEndTurnClick}>End turn</button>}</div>
         </header>
+        <Controls />
 
         <Notification>{notificationMessage}</Notification>
         <div className="board-holder">

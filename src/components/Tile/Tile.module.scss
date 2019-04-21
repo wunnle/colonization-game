@@ -4,13 +4,15 @@
   top: 0;
   width: 100%;
   height: 100%;
+  backface-visibility: hidden;
+  font-size: 10px;
 }
 
 
 .tile {
   width: 100px;
   height: 100px;
-  border: 3px solid#282c34;
+  //border: 3px solid#282c34;
   background: white;
   box-sizing: border-box;
   display: flex;
@@ -18,36 +20,55 @@
   justify-content: center;
   font-size: 45px;
   color: black;
-}
-
-.tileTop {
-  box-sizing: border-box;
+  position: relative;
+  transform-style: preserve-3d;
+  
 }
 
 .tileHolder {
   position: relative;
 }
 
-.tileN {
-  transform: rotateY(90deg)
-}
-
-.tileS {
-  // transform: rotateX(76deg);
-  // background: white;
-  // @extend %tileSide;
-  // bottom: 0;
-  // border: 2px solid yellow;
-  // box-sizing: border-box;
-  // margin-top: auto;
-}
-
-.tileW {
+.sideTop {
+  box-sizing: border-box;
+  @extend %tileSide;
+  background: rgba(150, 205, 159, 0.2901960784313726);
+  transform: translateZ(0);
+  opacity: 1;
+  border: 1px solid #4fa95f;
 
 }
 
-.tileE {
+.side1 {
+  @extend %tileSide;
+  background: #aaffb1;
+  width: 30px;
+  transform: translateX(-30px) rotateY(-90deg);
+  transform-origin: right center;
+}
 
+.side2 {
+  @extend %tileSide;
+  background: #81e389;
+  height: 30px;
+  transform: translateY(-30px) rotateX(90deg);
+  transform-origin: bottom center;
+}
+
+.side3 {
+  @extend %tileSide;
+  background: #76dd7f;
+  height: 30px;
+  transform: translateY(100px) rotateX(-90deg);
+  transform-origin: top center;
+}
+
+.side4 {
+  @extend %tileSide;
+  background: #78dd76;
+  width: 30px;
+  transform: translateX(100px) rotateY(90deg);
+  transform-origin: left center;
   
 }
 
