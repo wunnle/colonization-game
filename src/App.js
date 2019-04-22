@@ -9,9 +9,8 @@ import Tile from './components/Tile'
 import Planet from './components/Planet'
 import Notification from './components/Notification'
 import { getBuildingPowerOutput, getPlayerId, getUpgradeCost, getShadowLenght, getNextSunDirection, getShadowIntensity } from './gameHelpers'
-
+import { Controls } from './components/Controls'
 import './App.css';
-import { Controls } from './components/TestTile/Controls';
 
 const defaultRowProp = {
   level: null,

@@ -1,7 +1,7 @@
 import React from 'react';
 import Tile from '../Tile'
 import Planet from '../Planet'
-import { Controls } from './Controls';
+import { Controls } from '../Controls';
 
 const TestTile = () => {
 
