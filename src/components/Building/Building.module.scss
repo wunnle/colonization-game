@@ -5,10 +5,11 @@
   left: 18px;
   top: 11px;
   transition: filter 0.3s ease 1.5s;
+
 }
 
 .dark .buildingItself {
-  filter: brightness(0.4);
+  filter: brightness(0.6) grayscale(1);
 }
 
 .building {
