@@ -13,13 +13,13 @@ h1 {
 
 .App {
   text-align: center;
-  background-color: #282c34;
+  background-color: #fefefe;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  color: white;
+  color: #282c34l;
 }
 
 header {
@@ -83,24 +83,22 @@ header button {
   opacity: 1;
   transition: opacity 0.3s ease-in;
   transition-delay: 1s;
-  background: linear-gradient(to left, yellow 1%, #878f77 57%);
+  background: linear-gradient(to left, #d8e1bc 1%, #777482 57%);
 }
-
-
 
 .planet.sun-down.bricksFallen {
   border-bottom-color: yellow;
-  background: linear-gradient(to top, yellow 1%, #878f77 57%);
+  background: linear-gradient(to top, #d8e1bc 1%, #777482 57%);
 }
 
 .planet.sun-up.bricksFallen {
   border-top-color: yellow;
-  background: linear-gradient(to bottom, yellow 1%, #878f77 57%);
+  background: linear-gradient(to bottom, #d8e1bc 1%, #777482 57%);
 }
 
 .planet.sun-left.bricksFallen {
   border-left-color: yellow;
-  background: linear-gradient(to right, yellow 1%, #878f77 57%);
+  background: linear-gradient(to right, #d8e1bc 1%, #777482 57%);
 }
 
 .planet .building {

@@ -43,7 +43,7 @@
 
 .sideTopOpaque {
   @extend %tileSide;
-  background: rgb(133, 200, 129);
+  background: rgb(195, 209, 186);
   transition: background-color ease-in 0;
   border: 1px solid #4fa95f;
 }
@@ -101,7 +101,7 @@
 }
 
 .shadowLevel0 {
-  background: rgba(121, 245, 125, 0.5607843137254902);
+  background: rgba(242, 237, 239, 0.70);
 }
 
 .shadowLevel1 {
