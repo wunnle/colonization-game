@@ -44,8 +44,8 @@ header button {
 }
 
 .board-holder {
-  height: 620px;
-  width: 620px;
+  height: 600px;
+  width: 600px;
   display: flex;
   perspective: 1000px;
   perspective-origin: 50% 50%;
