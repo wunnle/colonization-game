@@ -9,9 +9,8 @@ import Tile from './components/Tile'
 import Planet from './components/Planet'
 import Notification from './components/Notification'
 import { getBuildingPowerOutput, getPlayerId, getUpgradeCost, getShadowLenght, getNextSunDirection, getShadowIntensity } from './gameHelpers'
-
+import { Controls } from './components/Controls'
 import './App.css';
-import { Controls } from './components/TestTile/Controls';
 
 const defaultRowProp = {
   level: null,
@@ -235,9 +234,6 @@ class App extends Component {
 
     const { gameStarted, players, wholeTurn, activePlayer, sunDirection, notificationMessage } = this.props
     const { createTileRow, handleEndTurnClick, renderBoard } = this
-  
-    document.documentElement.style.setProperty('--planet-z-angle', "0deg");
-    document.documentElement.style.setProperty('--planet-x-angle', "45deg");
 
 
     return (
