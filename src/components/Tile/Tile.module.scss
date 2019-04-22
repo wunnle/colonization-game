@@ -93,12 +93,35 @@
 
 .shadowLevel1 {
   background: rgba(121, 245, 125, 0.3);
+
+  .building.level--1 {
+    .buildingItself {
+      filter: brightness(0.3);
+    }
+  }
 }
 
 .shadowLevel2 {
   background: rgba(121, 245, 125, 0.1);
+
+  .building.level--1, .building.level--2 {
+    .buildingItself {
+      filter: brightness(0.3);
+    }
+  }
 }
 
 .shadowLevel3 {
   background: rgba(121, 245, 125, 0.05);
+
+  .building.level--1, .building.level--2, .building.level--3 {
+    .buildingItself {
+      filter: brightness(0.3);
+    }
+  }
+}
+
+.buildingItself {
+  transform: rotateX(-90deg) translateZ(-20px) translateY(0px) scale(1);
+  transform-origin: bottom;
 }

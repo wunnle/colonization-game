@@ -133,10 +133,6 @@ header button {
   left: 10px;
 }
 
-.planet .building .building-itself {
-  transform: rotateX(-90deg) translateZ(-20px) translateY(0px) scale(1);
-  transform-origin: bottom;
-}
 
 .planet.sun-right .building--blue .building-circle, .planet.sun-right .building--red .building-circle {
   box-shadow: -8px 0px 47px rgba(0, 0, 0, 0.3);

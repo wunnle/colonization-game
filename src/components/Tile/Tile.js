@@ -1,5 +1,5 @@
 import React, { Component, useState } from 'react';
-import styles, { tile, tileHolder, sideTopOpaque, side1, side2, side3, side4, sideTop } from './Tile.module.scss'
+import styles, { tile, tileHolder, sideTopOpaque, side1, side2, side3, side4, sideTop, buildingItself } from './Tile.module.scss'
 
 const Tile = ({ level = 0, owner, handleClick, shadowLevel, zPosition }) => {
   return (
@@ -13,7 +13,7 @@ const Building = ({ owner, level }) => {
   return (
     <div className={`building building--${owner} level--${level}`}>
       <span className="building-circle"></span>
-      <div className="building-itself">
+      <div className={buildingItself}>
         {(level === 0) && ''}
         {(level === 1) && '🌱'}
         {(level === 2) && '🏠'}
@@ -36,7 +36,7 @@ const TileHolder = ({ children, handleClick, shadowLevel, zPosition }) => {
     <div className={`${tile} ${shadowLevels[shadowLevel]}`} onClick={handleClick} 
     style={{
         transform: `translateZ(${zPosition}px)`,
-        transitionDuration: `${z / 110}s`
+        transitionDuration: `${z / 110}s`,
       }}>
       {children}
       <div className={zPosition > 0 ? sideTopOpaque : sideTop}></div>
