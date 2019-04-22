@@ -25,13 +25,14 @@ class App extends Component {
 
     setTimeout(() => {
       this.setState({
-        zPositions: Array(36).fill(0)
+        zPositions: Array(36).fill(0),
+        bricksFallen: true
       })
     }, 600);
   }
 
   state = {
-    zPositions: Array(36).fill().map(i => Math.floor(Math.random() * 95) + 60)
+    zPositions: Array(36).fill().map(i => Math.floor(Math.random() * 170) + 40)
   }
 
   newNotification = (message) => this.props.dispatch(popNotification(message))
@@ -259,7 +260,7 @@ class App extends Component {
 
         <Notification>{notificationMessage}</Notification>
         <div className="board-holder">
-          <Planet sunDirection={sunDirection}>
+          <Planet sunDirection={sunDirection} bricksFallen={this.state.bricksFallen}>
             {renderBoard()}
           </Planet>
         </div>

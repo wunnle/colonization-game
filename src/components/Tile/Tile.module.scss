@@ -22,7 +22,7 @@
   color: black;
   position: relative;
   transform-style: preserve-3d;
-  transition: transform 0.3s cubic-bezier(1, 0.12, 0.05, 0.94);
+  transition: transform 0.2s cubic-bezier(1, 0.12, 0.05, 0.94);
   
 }
 
@@ -33,15 +33,19 @@
 .sideTop {
   box-sizing: border-box;
   @extend %tileSide;
-  background: rgba(150, 205, 159, 0.2901960784313726);
+  background: rgba(133, 200, 129, 0.1);
   transform: translateZ(0);
   opacity: 1;
   border: 1px solid #4fa95f;
+  transition: background-color ease-in 1s;
+  transition-delay: 1s;
 }
 
 .sideTopOpaque {
-  @extend .sideTop;
-  background: rgba(150, 205, 159, 1);
+  @extend %tileSide;
+  background: rgb(133, 200, 129);
+  transition: background-color ease-in 0;
+  border: 1px solid #4fa95f;
 }
 
 .side1 {

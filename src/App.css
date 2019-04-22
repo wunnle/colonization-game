@@ -63,6 +63,8 @@ header button {
   transform-style: preserve-3d;
   transition: background-color 0.3s ease, transform 0.5s cubic-bezier(0, 0.76, 0.44, 1.33);
   will-change: transform;
+  transition-delay: 2s;
+  background-color: transparent;
 }
 
 .planet__inner {
@@ -70,24 +72,36 @@ header button {
   flex-wrap: wrap;
 }
 
-.planet.sun-right {
-  border-right-color: yellow;
-  background: linear-gradient(to left, #3f0 1%, #878f77 57%);
+.planet.sun-right::before {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
 }
 
-.planet.sun-down {
+.planet.sun-right.bricksFallen::before {
+  opacity: 1;
+  transition: opacity 0.3s ease-in;
+  transition-delay: 1s;
+  background: linear-gradient(to left, yellow 1%, #878f77 57%);
+}
+
+
+
+.planet.sun-down.bricksFallen {
   border-bottom-color: yellow;
-  background: linear-gradient(to top, #3f0 1%, #878f77 57%);
+  background: linear-gradient(to top, yellow 1%, #878f77 57%);
 }
 
-.planet.sun-up {
+.planet.sun-up.bricksFallen {
   border-top-color: yellow;
-  background: linear-gradient(to bottom, #3f0 1%, #878f77 57%);
+  background: linear-gradient(to bottom, yellow 1%, #878f77 57%);
 }
 
-.planet.sun-left {
+.planet.sun-left.bricksFallen {
   border-left-color: yellow;
-  background: linear-gradient(to right, #3f0 1%, #878f77 57%);
+  background: linear-gradient(to right, yellow 1%, #878f77 57%);
 }
 
 .planet .building {
