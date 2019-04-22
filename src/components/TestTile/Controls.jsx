@@ -9,6 +9,6 @@ export const Controls = () => {
     <input type="range" min="0" max="360" value={zAngle} onChange={(e) => setZAngle(e.target.value)} />
     <br />
     <label htmlFor="">X Angle: {xAngle} </label>
-    <input type="range" min="0" max="360" value={xAngle} onChange={(e) => setXAngle(e.target.value)} />
+    <input type="range" min="0" max="70" value={xAngle} onChange={(e) => setXAngle(e.target.value)} />
   </div>);
 };
