@@ -22,15 +22,25 @@ class App extends Component {
   componentDidMount() {
     const { dispatch } = this.props
     dispatch(startGame())
+
+    setTimeout(() => {
+      this.setState({
+        zPositions: Array(36).fill(0)
+      })
+    }, 600);
+  }
+
+  state = {
+    zPositions: Array(36).fill().map(i => Math.floor(Math.random() * 95) + 60)
   }
 
   newNotification = (message) => this.props.dispatch(popNotification(message))
 
   createTileRow = (data, rowIndex) => {
-    console.log({data})
+    console.log({rowIndex})
     const row = Array(3)
     data.forEach((props, i) => {
-      row[i] = <Tile {...props} key={`row${rowIndex}` + (i + 1)} col={i + 1} row={data.name}
+      row[i] = <Tile {...props} zPosition={this.state.zPositions[i+rowIndex]} key={`row${rowIndex}` + (i + 1)} col={i + 1} row={data.name}
         handleClick={() => this.handleRowClick({ col: (i + 1), row: Number(rowIndex + 1), owner: props.owner })} />
     })
 
