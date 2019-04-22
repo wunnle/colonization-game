@@ -234,9 +234,6 @@ class App extends Component {
 
     const { gameStarted, players, wholeTurn, activePlayer, sunDirection, notificationMessage } = this.props
     const { createTileRow, handleEndTurnClick, renderBoard } = this
-  
-    document.documentElement.style.setProperty('--planet-z-angle', "0deg");
-    document.documentElement.style.setProperty('--planet-x-angle', "45deg");
 
 
     return (
