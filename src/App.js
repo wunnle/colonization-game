@@ -32,7 +32,7 @@ class App extends Component {
   }
 
   state = {
-    zPositions: Array(36).fill().map(i => Math.floor(Math.random() * 170) + 40)
+    zPositions: Array(36).fill().map(i => Math.floor(Math.random() * 120) + 50)
   }
 
   newNotification = (message) => this.props.dispatch(popNotification(message))

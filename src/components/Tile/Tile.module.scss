@@ -22,7 +22,7 @@
   color: black;
   position: relative;
   transform-style: preserve-3d;
-  transition: transform 0.2s cubic-bezier(1, 0.12, 0.05, 0.94);
+  transition: transform 0.2s cubic-bezier(1, 0.70, 0.10, 0.9);
   
 }
 
@@ -50,7 +50,7 @@
 
 .side1 {
   @extend %tileSide;
-  background: #aaffb1;
+  background: #72c46c;
   width: 30px;
   transform: translateX(-30px) rotateY(-90deg);
   transform-origin: right center;
@@ -58,7 +58,7 @@
 
 .side2 {
   @extend %tileSide;
-  background: #81e389;
+  background: #72c46c;
   height: 30px;
   transform: translateY(-30px) rotateX(90deg);
   transform-origin: bottom center;
@@ -66,7 +66,7 @@
 
 .side3 {
   @extend %tileSide;
-  background: #76dd7f;
+  background: #72c46c;
   height: 30px;
   transform: translateY(100px) rotateX(-90deg);
   transform-origin: top center;
@@ -74,11 +74,24 @@
 
 .side4 {
   @extend %tileSide;
-  background: #78dd76;
+  background: #72c46c;
   width: 30px;
   transform: translateX(100px) rotateY(90deg);
   transform-origin: left center;
   
+}
+
+.shadow {
+  box-sizing: border-box;
+  background: black;
+  -webkit-transform: translateZ(-10px);
+  transform: translateZ(-85px);
+  opacity: 1;
+  -webkit-filter: blur(100px);
+  filter: blur(53px);
+  opacity: 0.8;
+  width: 100px;
+  height: 100px;
 }
 
 .tile--dark {
@@ -124,4 +137,7 @@
 .buildingItself {
   transform: rotateX(-90deg) translateZ(-20px) translateY(0px) scale(1);
   transform-origin: bottom;
+  position: absolute;
+  left: 18px;
+  top: 11px;
 }

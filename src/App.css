@@ -61,9 +61,8 @@ header button {
   /* background: url('./img/original.jpg'); */
   transform: rotateX(var(--planet-x-angle)) translateY(0) translateZ(140px) rotateZ(var(--planet-z-angle));
   transform-style: preserve-3d;
-  transition: background-color 0.3s ease, transform 0.5s cubic-bezier(0, 0.76, 0.44, 1.33);
+  transition: background-color 0.3s ease 2s, transform 0.5s cubic-bezier(0, 0.76, 0.44, 1.33);
   will-change: transform;
-  transition-delay: 2s;
   background-color: transparent;
 }
 
@@ -195,7 +194,7 @@ header button {
 .planet .building .building-shadow {
   transform: translateZ(1px) translateX(0) rotate(var(--shadowAngle));
   transform-origin: calc(100% - 40px) 40px;
-  margin-right: 10px;
+  margin-right: -40px;
 }
 
 /* .planet.sun-right .building .building-shadow {

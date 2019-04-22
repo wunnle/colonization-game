@@ -1,5 +1,5 @@
 import React, { Component, useState } from 'react';
-import styles, { tile, tileHolder, sideTopOpaque, side1, side2, side3, side4, sideTop, buildingItself } from './Tile.module.scss'
+import styles, { tile, tileHolder, sideTopOpaque, side1, side2, side3, side4, sideTop, buildingItself, shadow } from './Tile.module.scss'
 
 const Tile = ({ level = 0, owner, handleClick, shadowLevel, zPosition }) => {
   return (
@@ -40,10 +40,11 @@ const TileHolder = ({ children, handleClick, shadowLevel, zPosition }) => {
       }}>
       {children}
       <div className={zPosition > 0 ? sideTopOpaque : sideTop}></div>
-      <div className={side1}>1</div>
-      <div className={side2}>2</div>
-      <div className={side3}>3</div>
-      <div className={side4}>4</div>
+      <div className={side1}></div>
+      <div className={side2}></div>
+      <div className={side3}></div>
+      <div className={side4}></div>
+      <div className={shadow}></div>
     </div>
   )
 }
