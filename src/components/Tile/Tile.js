@@ -1,27 +1,12 @@
 import React, { Component, useState } from 'react';
 import styles, { tile, tileHolder, sideTopOpaque, side1, side2, side3, side4, sideTop, buildingItself, shadow } from './Tile.module.scss'
+import { Building } from '../Building';
 
 const Tile = ({ level = 0, owner, handleClick, shadowLevel, zPosition }) => {
   return (
     <TileHolder handleClick={handleClick} shadowLevel={shadowLevel} zPosition={zPosition}>
-      <Building owner={owner} level={level} isTopTransparent={!zPosition > 0} />
+      <Building owner={owner} level={level} shadowLevel={shadowLevel} isTopTransparent={!zPosition > 0} />
     </TileHolder>
-  )
-}
-
-const Building = ({ owner, level }) => {
-  return (
-    <div className={`building building--${owner} level--${level}`}>
-      <span className="building-circle"></span>
-      <div className={buildingItself}>
-        {(level === 0) && ''}
-        {(level === 1) && '🌱'}
-        {(level === 2) && '🏠'}
-        {(level === 3) && '🚀'}
-      </div>
-      <span className="building-shadow">
-      </span>
-    </div>
   )
 }
 
@@ -32,9 +17,9 @@ const TileHolder = ({ children, handleClick, shadowLevel, zPosition }) => {
   const [z, setZ] = useState(zPosition)
 
 
- return (
-    <div className={`${tile} ${shadowLevels[shadowLevel]}`} onClick={handleClick} 
-    style={{
+  return (
+    <div className={`${tile} ${shadowLevels[shadowLevel]}`} onClick={handleClick}
+      style={{
         transform: `translateZ(${zPosition}px)`,
         transitionDuration: `${z / 110}s`,
       }}>

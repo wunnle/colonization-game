@@ -1,0 +1,12 @@
+.buildingItself {
+  transform: rotateX(-90deg) translateZ(-20px) translateY(0px) scale(1);
+  transform-origin: bottom;
+  position: absolute;
+  left: 18px;
+  top: 11px;
+  transition: filter 0.3s ease;
+}
+
+.dark .buildingItself {
+  filter: brightness(0.4);
+}
