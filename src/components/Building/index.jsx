@@ -15,8 +15,6 @@ export const Building = ({
         {level === 2 && '🏠'}
         {level === 3 && '🚀'}
       </div>
-      <span className="building-shadow">
-      </span>
     </div>;
 };
   
