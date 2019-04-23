@@ -21,7 +21,7 @@ const TileHolder = ({ children, handleClick, shadowLevel, zPosition }) => {
     <div className={`${tile} ${shadowLevels[shadowLevel]}`} onClick={handleClick}
       style={{
         transform: `translateZ(${zPosition}px)`,
-        transitionDuration: `${z / 110}s`,
+        transitionDuration: `${z / 160 - 3.4}s`,
       }}>
       {children}
       <div className={zPosition > 0 ? sideTopOpaque : sideTop}></div>

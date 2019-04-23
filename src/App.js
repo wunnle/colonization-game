@@ -32,7 +32,8 @@ class App extends Component {
   }
 
   state = {
-    zPositions: Array(36).fill().map(i => Math.floor(Math.random() * 120) + 0)
+    //zPositions: Array(36).fill().map(i => Math.floor(Math.random() * 140) + 30)
+    zPositions: Array(36).fill().map((item, i) => ((i * 30) - 100)).reverse()
   }
 
   newNotification = (message) => this.props.dispatch(popNotification(message))
@@ -224,6 +225,8 @@ class App extends Component {
 
 
   componentDidUpdate(prevProps) {
+    console.log(this.state.zPositions)
+
     if (prevProps.wholeTurn !== this.props.wholeTurn) {
       this.doNewSeasonActions()
     }
