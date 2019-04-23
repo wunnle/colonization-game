@@ -101,7 +101,6 @@ header button {
   opacity: 1;
   transition: opacity 2s ease-out;
   background: linear-gradient(to left, #eaec58 -39%, #cdc9cd 57%);
-  background-position: 400%;
 }
 
 .planet.sun-down.lightedUp {
@@ -205,6 +204,16 @@ header button {
 
 .planet .building.level--3 .building-shadow {
   width: 380px;
+}
+
+.planet.sun-left .rightEdgeTile .building-shadow {
+  width: 90px;
+  border-bottom-left-radius: 0;
+  border-top-left-radius: 0;
+}
+
+.planet.sun-left .rightEdgeTile {
+  overflow: hidden;
 }
 
 .planet .building .building-shadow {
