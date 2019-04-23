@@ -1,0 +1,23 @@
+.buildingItself {
+  transform: rotateX(-90deg) translateZ(-20px) translateY(0px) scale(1);
+  transform-origin: bottom;
+  position: absolute;
+  left: 18px;
+  top: 11px;
+  filter: none
+}
+
+.dark .buildingItself {
+  filter: brightness(0.6) grayscale(1);
+  transition: filter 0.3s ease 1.5s;
+}
+
+.building {
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  position: relative;
+  transform-style: preserve-3d;
+  width: 100%;
+  height: 100px;
+}

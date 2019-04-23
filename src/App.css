@@ -11,15 +11,30 @@ h1 {
 
 }
 
+.gradient {
+  background: linear-gradient(to left, #c7ec2f 0%,#fefefe 55%);
+  position: absolute;
+  z-index: 0;
+  width: 100vw;
+  height: 100vw;
+  transform: rotate(calc(var(--shadowAngle)));
+  opacity: 0;
+}
+
+.lightedUp .gradient {
+    opacity: 0.10;
+    transition: transform 0.3s ease-in, opacity 1s ease-in;
+}
+
 .App {
   text-align: center;
-  background-color: #282c34;
+  background-color: #fefefe;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  color: white;
+  color: #282c34l;
 }
 
 header {
@@ -28,6 +43,8 @@ header {
   margin-top: 50px;
   margin-bottom: 26px;
   display: flex;
+  position: relative;
+  z-index: 1;
 }
 
 header .button__holder {
@@ -59,10 +76,11 @@ header button {
   flex-wrap: wrap;
   border-color: #282c34;
   /* background: url('./img/original.jpg'); */
-  transform: rotateX(var(--planet-x-angle)) translateY(0) translateZ(140px) rotateZ(var(--planet-z-angle));
+  transform: rotateX(var(--planet-x-angle)) translateY(-20px) translateZ(120px) rotateZ(var(--planet-z-angle)) scale(1.10);
   transform-style: preserve-3d;
-  transition: background-color 0.3s ease, transform 0.5s cubic-bezier(0, 0.76, 0.44, 1.33);
+  transition: background-color 2s ease, transform 0.5s cubic-bezier(0, 0.76, 0.44, 1.33);
   will-change: transform;
+  background-color: transparent;
 }
 
 .planet__inner {
@@ -70,24 +88,32 @@ header button {
   flex-wrap: wrap;
 }
 
-.planet.sun-right {
-  border-right-color: yellow;
-  background: linear-gradient(to left, #3f0 1%, #878f77 57%);
+.planet.sun-right::before {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  background-position: 200%;
 }
 
-.planet.sun-down {
-  border-bottom-color: yellow;
-  background: linear-gradient(to top, #3f0 1%, #878f77 57%);
+.planet.sun-right.lightedUp::before {
+  opacity: 1;
+  transition: opacity 2s ease-out;
+  background: linear-gradient(to left, #eaec58 -39%, #cdc9cd 57%);
 }
 
-.planet.sun-up {
+.planet.sun-down.lightedUp {
+  background: linear-gradient(to top, #eaec58 -39%, #cdc9cd 57%);
+}
+
+.planet.sun-up.lightedUp {
   border-top-color: yellow;
-  background: linear-gradient(to bottom, #3f0 1%, #878f77 57%);
+  background: linear-gradient(to bottom, #eaec58 -39%, #cdc9cd 57%);
 }
 
-.planet.sun-left {
-  border-left-color: yellow;
-  background: linear-gradient(to right, #3f0 1%, #878f77 57%);
+.planet.sun-left.lightedUp {
+  background: linear-gradient(to right, #eaec58 -39%, #cdc9cd 57%);
 }
 
 .planet .building {
@@ -117,30 +143,11 @@ header button {
   position: absolute;
   transform: translateZ(2px);
   left: 10px;
+
 }
 
-.planet .building .building-itself {
-  transform: rotateX(-90deg) translateZ(-20px) translateY(0px) scale(1);
-  transform-origin: bottom;
-}
 
-.planet.sun-right .building--blue .building-circle, .planet.sun-right .building--red .building-circle {
-  box-shadow: -8px 0px 47px rgba(0, 0, 0, 0.3);
-}
-
-.planet.sun-down .building--blue .building-circle, .planet.sun-down .building--red .building-circle {
-  box-shadow: -8px 0px 47px rgba(0, 0, 0, 0.3);
-}
-
-.planet.sun-up .building--blue .building-circle, .planet.sun-up .building--red .building-circle {
-  box-shadow: -8px 0px 47px rgba(0, 0, 0, 0.3);
-}
-
-.planet.sun-left .building--blue .building-circle, .planet.sun-left .building--red .building-circle {
-  box-shadow: -8px 0px 47px rgba(0, 0, 0, 0.3);
-}
-
-.planet .building--blue .building-circle, .planet .building--red .building-circle {
+.building--blue .building-circle, .building--red .building-circle {
   box-shadow: -8px 0px 47px rgba(0, 0, 0, 0.3);
 }
 
@@ -156,65 +163,10 @@ header button {
   box-sizing: border-box;
 }
 
-.planet .building .building-shadow {
-  content: '';
-  position: absolute;
-  height: 80px;
-  background: black;
-  z-index: 0;
-  right: 0;
-  border-radius: 80px;
-  opacity: 0.25;
-  transition: transform 0.5s ease-in-out;
-  transition-delay: 1s;
-  top: 10px;
-}
-
-.planet .building.level--1 .building-shadow {
-  width: 180px;
-}
-
-.planet .building.level--2 .building-shadow {
-  width: 280px;
-}
-
-.planet .building.level--3 .building-shadow {
-  width: 380px;
-}
-
-.planet .building .building-shadow {
-  transform: translateZ(1px) translateX(0) rotate(var(--shadowAngle));
-  transform-origin: calc(100% - 40px) 40px;
-  margin-right: 10px;
-}
-
-/* .planet.sun-right .building .building-shadow {
-  transform: rotate(0);
-  transform-origin: 141px center
-}
-
-.planet.sun-left .building .building-shadow {
-  transform: rotate(180deg);
-  transform-origin: 141px center
-}
-
-.planet.sun-down .building .building-shadow {
-  transform: rotate(90deg);
-  transform-origin: 141px center
-}
-
-.planet.sun-up .building .building-shadow {
-  transform: rotate(270deg);
-  transform-origin: 141px center
-} */
-
 .App-logo {
   animation: App-logo-spin infinite 20s linear;
   height: 40vmin;
   pointer-events: none;
-}
-
-.App-header {
 }
 
 .App-link {

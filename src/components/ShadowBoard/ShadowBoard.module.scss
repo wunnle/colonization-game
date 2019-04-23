@@ -1,0 +1,45 @@
+.shadowBoard {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  position: absolute;
+  transform-style: preserve-3d;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.shadow {
+    position: absolute;
+    height: 80px;
+    background: black;
+    z-index: 0;
+    border-radius: 80px;
+    opacity: 0.50;
+    transition: transform 0.5s ease-in-out;
+    transition-delay: 1s;
+    height: 80px;
+    display: block;
+    transform: translateZ(1px) translateX(0) rotate(var(--shadowAngle));
+    transform-origin: calc(100% - 40px) 40px;
+    right: 11px;
+    top: 10px;
+}
+
+.shadowLevel1 {
+  width: 180px;
+}
+
+.shadowLevel2 {
+  width: 280px;
+}
+
+.shadowLevel3 {
+  width: 380px;
+}
+
+
+.shadowTile {
+  width: 100px;
+  height: 100px;
+  position: relative;
+}
