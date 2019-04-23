@@ -36,7 +36,7 @@
   background: rgba(133, 200, 129, 0.1);
   transform: translateZ(0);
   opacity: 1;
-  border: 1px solid #e5afaf;
+  border: 1px solid rgba(121, 128, 119, 0.34901960784313724);
   transition: background-color ease-in 1s;
   transition-delay: 0.60s;
 }
@@ -45,7 +45,7 @@
   @extend %tileSide;
   background: rgba(188, 196, 191, 0.95);
   transition: background-color ease-in 0;
-  border: 1px solid #e5afaf;
+  border: 1px solid rgba(121, 128, 119, 0.34901960784313724);
 }
 
 .side1 {

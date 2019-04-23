@@ -1,4 +1,4 @@
-import React, {  Component } from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import logo from './logo.svg';
 import { startGame } from './actions/general'
@@ -38,10 +38,10 @@ class App extends Component {
   newNotification = (message) => this.props.dispatch(popNotification(message))
 
   createTileRow = (data, rowIndex) => {
-    console.log({rowIndex})
+    console.log({ rowIndex })
     const row = Array(3)
     data.forEach((props, i) => {
-      row[i] = <Tile {...props} zPosition={this.state.zPositions[i+rowIndex]} key={`row${rowIndex}` + (i + 1)} col={i + 1} row={data.name}
+      row[i] = <Tile {...props} zPosition={this.state.zPositions[i + rowIndex]} key={`row${rowIndex}` + (i + 1)} col={i + 1} row={data.name}
         handleClick={() => this.handleRowClick({ col: (i + 1), row: Number(rowIndex + 1), owner: props.owner })} />
     })
 
@@ -107,45 +107,45 @@ class App extends Component {
     const shadowLength = getShadowLenght(buildingLevel)
     const shadowIntensity = getShadowIntensity(buildingLevel)
     let remainingShadowLength = shadowLength
-    
+
     const castShadow = (row, col, remainingShadowLength) => {
 
-      if(sunDirection === 'right') {
+      if (sunDirection === 'right') {
         col > 1 && this.props.dispatch(updateTileLight(row, col - 1, shadowIntensity))
-  
+
         remainingShadowLength--
-  
+
         if (remainingShadowLength > 0 && col > 1) {
           castShadow(row, col - 1, remainingShadowLength)
         }
       }
 
-      if(sunDirection === 'left') {
+      if (sunDirection === 'left') {
         col < 6 && this.props.dispatch(updateTileLight(row, col + 1, shadowIntensity))
-  
+
         remainingShadowLength--
-  
+
         if (remainingShadowLength > 0 && col < 6) {
           castShadow(row, col + 1, remainingShadowLength)
         }
       }
 
-      if(sunDirection === 'down') {
-        row > 1 && this.props.dispatch(updateTileLight(row - 1 , col, shadowIntensity))
-  
+      if (sunDirection === 'down') {
+        row > 1 && this.props.dispatch(updateTileLight(row - 1, col, shadowIntensity))
+
         remainingShadowLength--
-  
+
         if (remainingShadowLength > 0 && row > 1) {
           castShadow(row - 1, col, remainingShadowLength)
         }
       }
 
-      if(sunDirection === 'up') {
-        row < 6 && this.props.dispatch(updateTileLight(row + 1 , col, shadowIntensity))
+      if (sunDirection === 'up') {
+        row < 6 && this.props.dispatch(updateTileLight(row + 1, col, shadowIntensity))
         //updateTileLight(row + 1, col, shadowIntensity)
-  
+
         remainingShadowLength--
-  
+
         if (remainingShadowLength > 0 && row < 6) {
           castShadow(row + 1, col, remainingShadowLength)
         }
@@ -164,7 +164,7 @@ class App extends Component {
     document.querySelector('body').style.setProperty('--shadowAngle', currentAngle + 90 + "deg");
 
 
-    dispatch(rotateSun(getNextSunDirection(sunDirection)))  
+    dispatch(rotateSun(getNextSunDirection(sunDirection)))
   }
 
   recalculateShadows = () => {
@@ -174,7 +174,7 @@ class App extends Component {
 
     board.forEach((row, rowIndex) => {
       row.forEach((tile, colIndex) => {
-        if(tile.level > 0) {
+        if (tile.level > 0) {
           this.castShadow(colIndex + 1, rowIndex + 1, nextSunDirection, tile.level)
         }
       })
@@ -190,7 +190,7 @@ class App extends Component {
 
     const { board, players, wholeTurn, dispatch } = this.props
 
-    if(wholeTurn > 1) {
+    if (wholeTurn > 1) {
       console.log(`this is season ${wholeTurn}. rotating sun`)
       this.rotateSun()
       this.resetShadows()
@@ -248,24 +248,24 @@ class App extends Component {
 
 
     return (
-      <div className="App">
-        <header>
-          <div className='header__inner'>
-            {wholeTurn > 0 ? <p>Season {wholeTurn} </p> : <p>Preparation stage</p>}
-            {gameStarted && <h1>Turn of {activePlayer.name} player</h1>}
-            <p>⚡ {activePlayer.energy}</p></div>
-          <div className='button__holder'>{wholeTurn > 0 && <button onClick={handleEndTurnClick}>End turn</button>}</div>
-        </header>
-        <Controls />
+        <div className="App">
+          <div className="gradient"></div>
+          <header>
+            <div className='header__inner'>
+              {wholeTurn > 0 ? <p>Season {wholeTurn} </p> : <p>Preparation stage</p>}
+              {gameStarted && <h1>Turn of {activePlayer.name} player</h1>}
+              <p>⚡ {activePlayer.energy}</p></div>
+            <div className='button__holder'>{wholeTurn > 0 && <button onClick={handleEndTurnClick}>End turn</button>}</div>
+          </header>
+          <Controls />
 
-        <Notification>{notificationMessage}</Notification>
-        <div className="board-holder">
-          <Planet sunDirection={sunDirection} bricksFallen={this.state.bricksFallen}>
-            {renderBoard()}
-          </Planet>
+          <Notification>{notificationMessage}</Notification>
+          <div className="board-holder">
+            <Planet sunDirection={sunDirection} bricksFallen={this.state.bricksFallen}>
+              {renderBoard()}
+            </Planet>
+          </div>
         </div>
-
-      </div>
     );
   }
 }

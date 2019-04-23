@@ -11,6 +11,17 @@ h1 {
 
 }
 
+.gradient {
+  background: linear-gradient(to left, #c7ec2f 0%,#fefefe 55%);
+  position: absolute;
+  z-index: 0;
+  width: 100vw;
+  height: 100vw;
+  transform: rotate(calc(var(--shadowAngle)));
+  opacity: 0.12;
+  transition: transform 0.3s ease-in;
+}
+
 .App {
   text-align: center;
   background-color: #fefefe;
@@ -28,6 +39,8 @@ header {
   margin-top: 50px;
   margin-bottom: 26px;
   display: flex;
+  position: relative;
+  z-index: 1;
 }
 
 header .button__holder {
@@ -59,7 +72,7 @@ header button {
   flex-wrap: wrap;
   border-color: #282c34;
   /* background: url('./img/original.jpg'); */
-  transform: rotateX(var(--planet-x-angle)) translateY(0) translateZ(140px) rotateZ(var(--planet-z-angle));
+  transform: rotateX(var(--planet-x-angle)) translateY(-20px) translateZ(120px) rotateZ(var(--planet-z-angle)) scale(1.10);
   transform-style: preserve-3d;
   transition: background-color 0.3s ease 2s, transform 0.5s cubic-bezier(0, 0.76, 0.44, 1.33);
   will-change: transform;
