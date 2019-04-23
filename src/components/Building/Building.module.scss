@@ -4,12 +4,12 @@
   position: absolute;
   left: 18px;
   top: 11px;
-  transition: filter 0.3s ease 1.5s;
-
+  filter: none
 }
 
 .dark .buildingItself {
   filter: brightness(0.6) grayscale(1);
+  transition: filter 0.3s ease 1.5s;
 }
 
 .building {
