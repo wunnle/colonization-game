@@ -29,6 +29,14 @@ class App extends Component {
         bricksFallen: true
       })
     }, 600);
+
+    setTimeout(() => {
+      this.setState({
+        lightedUp: true
+      })
+
+      document.querySelector('body').classList.add('lightedUp')
+    }, 2400);
   }
 
   state = {
@@ -42,7 +50,7 @@ class App extends Component {
     console.log({ rowIndex })
     const row = Array(3)
     data.forEach((props, i) => {
-      row[i] = <Tile {...props} zPosition={this.state.zPositions[i + rowIndex]} key={`row${rowIndex}` + (i + 1)} col={i + 1} row={data.name}
+      row[i] = <Tile {...props} lightedUp={this.state.lightedUp} zPosition={this.state.zPositions[i + rowIndex]} key={`row${rowIndex}` + (i + 1)} col={i + 1} row={data.name}
         handleClick={() => this.handleRowClick({ col: (i + 1), row: Number(rowIndex + 1), owner: props.owner })} />
     })
 
@@ -264,7 +272,7 @@ class App extends Component {
 
           <Notification>{notificationMessage}</Notification>
           <div className="board-holder">
-            <Planet sunDirection={sunDirection} bricksFallen={this.state.bricksFallen}>
+            <Planet sunDirection={sunDirection} bricksFallen={this.state.bricksFallen} lightedUp={this.state.lightedUp}>
               {renderBoard()}
             </Planet>
           </div>

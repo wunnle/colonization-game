@@ -2,9 +2,9 @@ import React, { Component, useState } from 'react';
 import styles, { tile, tileHolder, sideTopOpaque, side1, side2, side3, side4, sideTop, buildingItself, shadow } from './Tile.module.scss'
 import { Building } from '../Building';
 
-const Tile = ({ level = 0, owner, handleClick, shadowLevel, zPosition }) => {
+const Tile = ({ level = 0, owner, handleClick, shadowLevel, zPosition, lightedUp }) => {
   return (
-    <TileHolder handleClick={handleClick} shadowLevel={shadowLevel} zPosition={zPosition}>
+    <TileHolder handleClick={handleClick} shadowLevel={shadowLevel} lightedUp={lightedUp} zPosition={zPosition}>
       <Building owner={owner} level={level} shadowLevel={shadowLevel} isTopTransparent={!zPosition > 0} />
     </TileHolder>
   )
@@ -12,7 +12,7 @@ const Tile = ({ level = 0, owner, handleClick, shadowLevel, zPosition }) => {
 
 const shadowLevels = [styles.shadowLevel0, styles.shadowLevel1, styles.shadowLevel2, styles.shadowLevel3]
 
-const TileHolder = ({ children, handleClick, shadowLevel, zPosition }) => {
+const TileHolder = ({ children, handleClick, shadowLevel, zPosition, lightedUp }) => {
 
   const [z, setZ] = useState(zPosition)
 
@@ -24,7 +24,7 @@ const TileHolder = ({ children, handleClick, shadowLevel, zPosition }) => {
         transitionDuration: `${z / 160 - 3.4}s`,
       }}>
       {children}
-      <div className={zPosition > 0 ? sideTopOpaque : sideTop}></div>
+      <div className={lightedUp ? sideTop : sideTopOpaque}></div>
       <div className={side1}></div>
       <div className={side2}></div>
       <div className={side3}></div>

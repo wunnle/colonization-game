@@ -18,8 +18,12 @@ h1 {
   width: 100vw;
   height: 100vw;
   transform: rotate(calc(var(--shadowAngle)));
-  opacity: 0.12;
-  transition: transform 0.3s ease-in;
+  opacity: 0;
+}
+
+.lightedUp .gradient {
+    opacity: 0.10;
+    transition: transform 0.3s ease-in, opacity 1s ease-in;
 }
 
 .App {
@@ -74,7 +78,7 @@ header button {
   /* background: url('./img/original.jpg'); */
   transform: rotateX(var(--planet-x-angle)) translateY(-20px) translateZ(120px) rotateZ(var(--planet-z-angle)) scale(1.10);
   transform-style: preserve-3d;
-  transition: background-color 0.3s ease 2s, transform 0.5s cubic-bezier(0, 0.76, 0.44, 1.33);
+  transition: background-color 2s ease, transform 0.5s cubic-bezier(0, 0.76, 0.44, 1.33);
   will-change: transform;
   background-color: transparent;
 }
@@ -90,28 +94,29 @@ header button {
   width: 100%;
   height: 100%;
   opacity: 0;
+  background-position: 200%;
 }
 
-.planet.sun-right.bricksFallen::before {
+.planet.sun-right.lightedUp::before {
   opacity: 1;
-  transition: opacity 0.3s ease-in;
-  transition-delay: 1s;
-  background: linear-gradient(to left, #d8e1bc 1%, #777482 57%);
+  transition: opacity 2s ease-out;
+  background: linear-gradient(to left, #eaec58 -39%, #cdc9cd 57%);
+  background-position: 400%;
 }
 
-.planet.sun-down.bricksFallen {
+.planet.sun-down.lightedUp {
   border-bottom-color: yellow;
-  background: linear-gradient(to top, #d8e1bc 1%, #777482 57%);
+  background: linear-gradient(to top, #d8e1bc 1%, #cdc9cd 57%);
 }
 
-.planet.sun-up.bricksFallen {
+.planet.sun-up.lightedUp {
   border-top-color: yellow;
-  background: linear-gradient(to bottom, #d8e1bc 1%, #777482 57%);
+  background: linear-gradient(to bottom, #d8e1bc 1%, #cdc9cd 57%);
 }
 
-.planet.sun-left.bricksFallen {
+.planet.sun-left.lightedUp {
   border-left-color: yellow;
-  background: linear-gradient(to right, #d8e1bc 1%, #777482 57%);
+  background: linear-gradient(to right, #d8e1bc 1%, #cdc9cd 57%);
 }
 
 .planet .building {
