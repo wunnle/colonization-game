@@ -180,7 +180,7 @@ header button {
   box-sizing: border-box;
 }
 
-.planet .building .building-shadow {
+/* .planet .building .building-shadow {
   content: '';
   position: absolute;
   height: 80px;
@@ -192,9 +192,9 @@ header button {
   transition: transform 0.5s ease-in-out;
   transition-delay: 1s;
   top: 10px;
-}
+} */
 
-.planet .building.level--1 .building-shadow {
+/* .planet .building.level--1 .building-shadow {
   width: 180px;
 }
 
@@ -204,9 +204,9 @@ header button {
 
 .planet .building.level--3 .building-shadow {
   width: 380px;
-}
+} */
 
-.planet.sun-left .rightEdgeTile .building-shadow {
+/* .planet.sun-left .rightEdgeTile .building-shadow {
   width: 90px;
   border-bottom-left-radius: 0;
   border-top-left-radius: 0;
@@ -214,32 +214,12 @@ header button {
 
 .planet.sun-left .rightEdgeTile {
   overflow: hidden;
-}
+} */
 
-.planet .building .building-shadow {
+/* .planet .building .building-shadow {
   transform: translateZ(1px) translateX(0) rotate(var(--shadowAngle));
   transform-origin: calc(100% - 40px) 40px;
   margin-right: -40px;
-}
-
-/* .planet.sun-right .building .building-shadow {
-  transform: rotate(0);
-  transform-origin: 141px center
-}
-
-.planet.sun-left .building .building-shadow {
-  transform: rotate(180deg);
-  transform-origin: 141px center
-}
-
-.planet.sun-down .building .building-shadow {
-  transform: rotate(90deg);
-  transform-origin: 141px center
-}
-
-.planet.sun-up .building .building-shadow {
-  transform: rotate(270deg);
-  transform-origin: 141px center
 } */
 
 .App-logo {
