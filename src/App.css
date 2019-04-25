@@ -78,7 +78,7 @@ header button {
   rotateX(var(--planet-x-angle))
   rotateZ(var(--planet-z-angle))
   translateZ(55px)
-  scale(1.1);
+  scale(1.3);
   transform-style: preserve-3d;
   transition: background-color 2s ease, transform 0.5s cubic-bezier(0, 0.76, 0.44, 1.33);
   will-change: transform;
