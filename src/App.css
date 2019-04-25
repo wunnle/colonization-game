@@ -74,8 +74,11 @@ header button {
   display: flex;
   flex-wrap: wrap;
   border-color: #282c34;
-  /* background: url('./img/original.jpg'); */
-  transform: rotateX(var(--planet-x-angle)) translateY(0px) translateZ(80px) rotateZ(var(--planet-z-angle)) scale(1.30);
+  transform: 
+  rotateX(var(--planet-x-angle))
+  rotateZ(var(--planet-z-angle))
+  translateZ(55px)
+  scale(1.1);
   transform-style: preserve-3d;
   transition: background-color 2s ease, transform 0.5s cubic-bezier(0, 0.76, 0.44, 1.33);
   will-change: transform;
