@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 export const Controls = () => {
   const [zAngle, setZAngle] = useState(45);
-  const [xAngle, setXAngle] = useState(60);
+  const [xAngle, setXAngle] = useState(54.7356103);
   document.documentElement.style.setProperty('--planet-z-angle', zAngle + "deg");
   document.documentElement.style.setProperty('--planet-x-angle', xAngle + "deg");
   return (<div className='controls'>
