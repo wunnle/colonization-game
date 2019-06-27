@@ -97,6 +97,7 @@
   height: 100%;
   position: relative;
   transform: translateY(0px) translateZ(-100px); 
+  display: none; // TODO: find a solution performs well
 
   &::before {
     display: block;
