@@ -7,12 +7,12 @@ const shadowLevels = [styles.shadowLevel1, styles.shadowLevel2, styles.shadowLev
 const ShadowBoard = ({ board }) => (
   <div className={styles.shadowBoard}>
     {
-      board[0] && board.map(row => row.map(tile => <Tile>{tile.level > 0 && <Shadow level={tile.level}/>}</Tile>))
+      board[0] && board.map(row => row.map(tile => <Tile>{tile.level > 0 && <Shadow level={tile.level} />}</Tile>))
     }
   </div>
 )
 
-const Shadow = ({level}) => (
+const Shadow = ({ level }) => (
   <div className={[styles.shadow, shadowLevels[level - 1]].join(' ')}></div>
 )
 
@@ -22,10 +22,8 @@ const Tile = ({ children }) => (
   </div>
 )
 
-const mapStateToProps = function ({ general, players, game, board }) {
-  return {
-    board
-  }
-}
+const mapStateToProps = ({ board }) => ({
+  board
+})
 
 export default connect(mapStateToProps)(ShadowBoard);
