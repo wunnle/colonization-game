@@ -9,7 +9,6 @@ import Tile from './components/Tile'
 import Planet from './components/Planet'
 import Notification from './components/Notification'
 import { getBuildingPowerOutput, getPlayerId, getUpgradeCost, getShadowLenght, getNextSunDirection, getShadowIntensity } from './gameHelpers'
-import { Controls } from './components/Controls'
 import './App.css';
 
 const defaultRowProp = {
@@ -268,7 +267,6 @@ class App extends Component {
               <p>⚡ {activePlayer.energy}</p></div>
             <div className='button__holder'>{wholeTurn > 0 && <button onClick={handleEndTurnClick}>End turn</button>}</div>
           </header>
-          <Controls />
 
           <Notification>{notificationMessage}</Notification>
           <div className="board-holder">
