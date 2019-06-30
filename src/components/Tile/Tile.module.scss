@@ -10,8 +10,8 @@
 
 
 .tile {
-  width: 100px;
-  height: 100px;
+  width: var(--tileSize);
+  height: var(--tileSize);
   //border: 3px solid#282c34;
   background: white;
   box-sizing: border-box;

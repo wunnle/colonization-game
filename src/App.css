@@ -2,6 +2,7 @@ body {
   --shadowAngle: 0deg;
   --planet-z-angle: 45deg;
   --planet-x-angle: 54.7356103deg;
+  --tileSize: 100px;
 }
 
 * {

@@ -253,7 +253,7 @@ class App extends Component {
 
   render() {
 
-    const { gameStarted, players, wholeTurn, activePlayer, sunDirection, notificationMessage } = this.props
+    const { gameStarted, players, wholeTurn, activePlayer, sunDirection, notificationMessage, board } = this.props
     const { createTileRow, handleEndTurnClick, renderBoard } = this
 
 
@@ -268,7 +268,7 @@ class App extends Component {
           <div className='button__holder'>{wholeTurn > 0 && <button onClick={handleEndTurnClick}>End turn</button>}</div>
         </header>
         <Notification>{notificationMessage}</Notification>
-        <Planet sunDirection={sunDirection} bricksFallen={this.state.bricksFallen} lightedUp={this.state.lightedUp}>
+        <Planet numberOfRows={board[0].length} numberOfColumns={board.length} sunDirection={sunDirection} bricksFallen={this.state.bricksFallen} lightedUp={this.state.lightedUp}>
           {renderBoard()}
         </Planet>
       </div>

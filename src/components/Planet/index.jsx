@@ -9,7 +9,11 @@ const sun = {
   down: styles.sunDown
 }
 
-const Planet = ({ children, sunDirection, bricksFallen, lightedUp }) => {
+const Planet = ({ children, sunDirection, bricksFallen, lightedUp, numberOfRows, numberOfColumns }) => {
+
+  document.documentElement.style.setProperty('--numberOfRows', numberOfRows);
+  document.documentElement.style.setProperty('--numberOfColumns', numberOfColumns);
+
   return (
     <div className={styles.container}>
       <div className={`${styles.planet} ${sun[sunDirection]} ${bricksFallen ? ' bricksFallen' : ''} ${lightedUp ? styles.lightedUp : ''}`}>

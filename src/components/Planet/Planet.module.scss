@@ -1,6 +1,6 @@
 .container {
-  height: 600px;
-  width: 600px;
+  height: calc(var(--tileSize) * var(--numberOfColumns));
+  width: calc(var(--tileSize) * var(--numberOfRows));
   display: flex;
   margin: auto;
   align-items: center;

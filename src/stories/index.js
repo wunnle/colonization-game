@@ -45,15 +45,13 @@ storiesOf('Planet', module)
   .add('default', () => (
     <>
       <div className="App">
-        <div className="board-holder">
-          <Planet
-            sunDirection={optionsKnob('sunDirection', lightOpts, 'right', optionsObj)}
-            lightedUp={true}
-            bricksFallen={true}
-          >
+        <Planet
+          sunDirection={optionsKnob('sunDirection', lightOpts, 'right', optionsObj)}
+          lightedUp={true}
+          bricksFallen={true}
+        >
           {Array(number('count', 4)).fill(<Tile lightedUp={true} level={number('level', 0)} owner={optionsKnob('owner', ownerOpts, '', optionsObj)} shadowLevel={0} />)}
-          </Planet>
-        </div>
+        </Planet>
       </div>
     </>
   ))
