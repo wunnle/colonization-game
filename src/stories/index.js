@@ -44,7 +44,7 @@ storiesOf('Planet', module)
   .addDecorator(withKnobs)
   .add('default', () => (
     <>
-      <div class="App">
+      <div className="App">
         <div className="board-holder">
           <Planet
             sunDirection={optionsKnob('sunDirection', lightOpts, 'right', optionsObj)}
